@@ -2,7 +2,7 @@ import React from "react";
 
 const NewsLetter = () => {
   return (
-    <div className="relative w-full h-110 bg-slate-200 overflow-hidden">
+    <div id="contact" className="relative w-full h-110 bg-slate-200 overflow-hidden">
       <img
         src="/images/pngwing.com (45).png"
         alt="popular-img"

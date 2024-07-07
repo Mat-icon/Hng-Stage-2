@@ -3,7 +3,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
 const Featured = () => {
   return (
-    <div className="w-full h-auto px-4 md:px-12 pb-4">
+    <div id="categories" className="w-full h-auto px-4 md:px-12 pb-4">
       <div className="flex flex-col mt-20">
         <h1 className="w-full text-center text-2xl font-extrabold text-green-700">
           Featured Categories

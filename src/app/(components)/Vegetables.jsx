@@ -38,8 +38,8 @@ const Vegetables = () => {
           />
           <div className="popular-text text-center">
             <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <p className=' text-green-600'>₦2000</p>
+            <p className=" text-gray-400 line-through">₦2500</p>
           
           </div>  <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
@@ -60,9 +60,9 @@ const Vegetables = () => {
             className=" h-1/2 w-4/5"
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Farm-Fresh watermelon</h2>
+            <p className=' text-green-600'>₦7000</p>
+            <p className=" text-gray-400 line-through">₦10000</p>
           
           </div>    <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
@@ -77,14 +77,14 @@ const Vegetables = () => {
             12%
           </span>
           <img
-            src="/images/pngwing.com (45).png"
+            src="/images/pngwing.com (21).png"
             alt="popular-img"
             className=" h-1/2"
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Garden Fresh eggplants</h2>
+            <p className=' text-green-600'>₦5000</p>
+            <p className=" text-gray-400 line-through">₦7000</p>
           
           </div>   <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
@@ -104,9 +104,9 @@ const Vegetables = () => {
             className=" h-1/2 "
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Fresh grape</h2>
+            <p className=' text-green-600'>₦7000</p>
+            <p className=" text-gray-400 line-through">₦10000</p>
           
           </div>  <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
@@ -126,9 +126,9 @@ const Vegetables = () => {
             className=" h-1/2"
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Garden Fresh eggplants</h2>
+            <p className=' text-green-600'>₦4000</p>
+            <p className=" text-gray-400 line-through">₦7000</p>
           
           </div>    <Link href='/cart'
               className="p-2 rounded-md text-sm flex items-center text-green-700"
@@ -148,9 +148,9 @@ const Vegetables = () => {
             className=" h-1/2 "
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Farm-Fresh Tomatoes</h2>
+            <p className=' text-green-600'>₦5000</p>
+            <p className=" text-gray-400 line-through">₦8000</p>
           
           </div>    <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
@@ -170,9 +170,9 @@ const Vegetables = () => {
             className=" h-1/2 "
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Organic Zucchini Squash</h2>
+            <p className=' text-green-600'>₦2000</p>
+            <p className=" text-gray-400 line-through">₦3000</p>
           
           </div>   <Link href='/cart'
               className="p-2 rounded-md text-sm flex items-center text-green-700"
@@ -192,9 +192,9 @@ const Vegetables = () => {
             className=" h-1/2 w-4/5"
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Crisp Romaine Lettuce</h2>
+            <p className=' text-green-600'>₦7000</p>
+            <p className=" text-gray-400 line-through">₦10000</p>
           
           </div>   <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"

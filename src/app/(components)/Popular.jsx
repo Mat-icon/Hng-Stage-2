@@ -4,7 +4,7 @@ import { MdShoppingCart } from "react-icons/md";
 
 const Popular = () => {
   return (
-    <div className="w-full h-auto py-8 px-4 md:px-12">
+    <div id="popular" className="w-full h-auto py-8 px-4 md:px-12">
       <h1 className="w-full text-center text-2xl font-bold text-green-700">
         Popular Product
       </h1>
@@ -37,8 +37,8 @@ const Popular = () => {
           />
           <div className="popular-text text-center">
             <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <p className=" text-green-600">₦4000</p>
+            <p className=" text-gray-400 line-through">₦4300</p>
           
           </div>    <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
@@ -54,14 +54,14 @@ const Popular = () => {
             12%
           </span>
           <img
-            src="/images/pngwing.com (19).png"
+            src="/images/pngwing.com (13).png"
             alt="popular-img"
             className=" h-1/2"
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Organic Baby Spinach</h2>
+            <p className=" text-green-600">₦2500</p>
+            <p className=" text-gray-400 line-through">₦2300</p>
           
           </div>    <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
@@ -76,14 +76,14 @@ const Popular = () => {
             12%
           </span>
           <img
-            src="/images/pngwing.com (13).png"
+            src="/images/pngwing.com (19).png"
             alt="popular-img"
             className=" h-1/2"
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Herb Infused Olive Oil</h2>
+            <p className=" text-green-600">₦4000</p>
+            <p className=" text-gray-400 line-through">₦4300</p>
           
           </div>    <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
@@ -103,9 +103,9 @@ const Popular = () => {
             className=" h-1/2 "
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Sweet Bell Hami Mix</h2>
+            <p className=" text-green-600">₦4000</p>
+            <p className=" text-gray-400 line-through">₦7300</p>
           
           </div>    <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
@@ -125,9 +125,9 @@ const Popular = () => {
             className=" h-1/2"
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Fresh Green wafers</h2>
+            <p className=" text-green-600">₦4000</p>
+            <p className=" text-gray-400 line-through">₦6300</p>
           
           </div>    <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
@@ -147,9 +147,9 @@ const Popular = () => {
             className=" h-1/2 "
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Farm-Fresh Tomatoes</h2>
+            <p className=" text-green-600">₦4000</p>
+            <p className=" text-gray-400 line-through">₦4300</p>
           
           </div>    <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
@@ -169,9 +169,9 @@ const Popular = () => {
             className=" h-1/2 "
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Organic Zucchini Squash</h2>
+            <p className=" text-green-600">₦4000</p>
+            <p className=" text-gray-400 line-through">₦4300</p>
           
           </div>    <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
@@ -191,9 +191,9 @@ const Popular = () => {
             className=" h-1/2 w-4/5"
           />
           <div className="popular-text text-center">
-            <h2 className="font-bold">Fresh Kale Greens</h2>
-            <p>$4000</p>
-            <p className=" text-gray-400 line-through">$4300</p>
+            <h2 className="font-bold">Crisp Romaine Lettuce</h2>
+            <p className=" text-green-600">₦4000</p>
+            <p className=" text-gray-400 line-through">₦4300</p>
           
           </div>    <Link href='/cart'
               className="p-2 rounded-md text-sm flex  items-center text-green-700"
