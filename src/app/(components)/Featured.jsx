@@ -52,7 +52,7 @@ const Featured = () => {
         </div>
       </div>
 
-      <div className="contain md:block hidden  mt-20  border-green-400  rounded-xl p-4">
+      <div className="contain md:hidden lg:block hidden  mt-20  border-green-400  rounded-xl p-4">
         <div className="flex flex-col md:flex-row product-card space-x-12">
           <img
             src="/images/pngwing.com (9).png"
