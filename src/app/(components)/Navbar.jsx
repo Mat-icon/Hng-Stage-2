@@ -18,9 +18,8 @@ const Navbar = () => {
       <div className="flex items-center text-black space-x-8">
         <ul className=" inline-flex items-center space-x-8 md:text-xs lg:text-base">
           <li ><Link href='/'className="flex items-center"  style={{ color: "#7AC74F" }}>Home <RiArrowDropDownLine className=" text-3xl"/></Link></li>
-          <li><Link href='/'>About us</Link></li>
+          <li><Link href='/'>Categories</Link></li>
           <li><Link href='/' className="flex items-center">Shop<RiArrowDropDownLine className=" text-3xl"/></Link></li>
-          <li><Link href='/'>Blog</Link></li>
           <li><Link href='/'>Contact</Link></li>
         </ul>
         <button

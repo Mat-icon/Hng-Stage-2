@@ -23,8 +23,12 @@ const Header = () => {
           </button>
         </form>
       </div>
-      <div className="flex items-center">
-        <FaCartShopping className=" text-black mr-4 md:mr-8" />
+      <div className="flex items-center space-x-2">
+        <Link href='/checkout' className="relative">
+           <FaCartShopping className=" text-black mr-4 md:mr-8" />
+           <span className=" text-x translate-x-1/2 translate-y-1/2 py-1 px-2 absolute bottom-5  bg-lime-500 rounded-full text-white">2</span>
+        </Link>
+       
         <MdMenu className=" text-black block  md:block lg:hidden"/>
         <button
           className="p-4 rounded-md ml-3 md:text-sm lg:text-base hidden md:hidden lg:block"
