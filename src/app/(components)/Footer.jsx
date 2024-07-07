@@ -10,7 +10,7 @@ import {
   
   export default function Footer() {
     return (
-      <footer className="text-white pt-10" style={{ background: "#589C32" }}>
+      <footer className="text-white pt-10 poppins" style={{ background: "#589C32" }}>
         <div className="container mx-auto px-4">
           <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row items-start justify-between">
             
@@ -28,8 +28,8 @@ import {
               </p>
             
                 <div className="flex flex-row justify-between md:justify-normal items-center space-x-2  md:space-x-4">
-                  <img src="/images/Frame 71.png" alt="download" className="w-32 md:w-32 lg:w-44  "/>
-                  <img src="/images/Frame 70.png" alt="download" className="w-32 md:w-32 lg:w-44 "/>
+                  <img src="/images/Frame 71.png" alt="download" className="w-32 md:w-32 lg:w-44 cursor-pointer"/>
+                  <img src="/images/Frame 70.png" alt="download" className="w-32 md:w-32 lg:w-44  cursor-pointer"/>
                
               </div>
               <div className="flex justify-center md:justify-start space-x-4 mt-4">

@@ -4,7 +4,7 @@ import { MdMenu } from "react-icons/md";
 
 const Header = () => {
   return (
-    <div className=" flex items-center justify-between bg-white px-8 md:px-16 py-3 border-b border-slate-200">
+    <div className=" flex items-center justify-between bg-white px-8 md:px-16 py-3 border-b border-slate-200 poppins">
       <div className="logo flex items-center">
         <img src="/images/Logo.png" alt="logo" className="w-44" />
         <form className="ml-8 hidden md:hidden lg:block">

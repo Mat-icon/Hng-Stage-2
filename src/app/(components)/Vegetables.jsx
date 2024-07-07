@@ -55,7 +55,7 @@ const Vegetables = () => {
             12%
           </span>
           <img
-            src="/images/pngwing.com (12).png"
+            src="/images/pngwing.com (43).png"
             alt="popular-img"
             className=" h-1/2 w-4/5"
           />
@@ -77,7 +77,7 @@ const Vegetables = () => {
             12%
           </span>
           <img
-            src="/images/pngwing.com (13).png"
+            src="/images/pngwing.com (45).png"
             alt="popular-img"
             className=" h-1/2"
           />
@@ -95,11 +95,11 @@ const Vegetables = () => {
               <MdShoppingCart className=" text-green-700 mr-2" />Add
             </Link>
         </div><div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
-          <span className="absolute top-0 right-0 p-2 px-4 w-14 text-sm bg-yellow-200 text-yellow-900 font-bold">
+          <span className="absolute top-0 right-0 p-2 px-4 w-14 text-sm bg-yellow-300 text-yellow-900 font-bold">
             New
           </span>
           <img
-            src="/images/pngwing.com (14).png"
+            src="/images/pngwing.com (44).png"
             alt="popular-img"
             className=" h-1/2 "
           />
@@ -121,7 +121,7 @@ const Vegetables = () => {
             12%
           </span>
           <img
-            src="/images/pngwing.com (15).png"
+            src="/images/pngwing.com (22).png"
             alt="popular-img"
             className=" h-1/2"
           />
@@ -161,7 +161,7 @@ const Vegetables = () => {
               <MdShoppingCart className=" text-green-700 mr-2" />Add
             </Link>
         </div><div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
-        <span className="absolute top-0 right-0 p-2 px-4 w-14 text-sm bg-yellow-200 text-yellow-900 font-bold">
+        <span className="absolute top-0 right-0 p-2 px-4 w-14 text-sm bg-yellow-300 text-yellow-900 font-bold">
             New
           </span>
           <img

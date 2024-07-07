@@ -33,7 +33,7 @@ const Popular = () => {
           <img
             src="/images/pngwing.com (12).png"
             alt="popular-img"
-            className=" h-1/2 w-4/5"
+            className=" h-1/2 "
           />
           <div className="popular-text text-center">
             <h2 className="font-bold">Fresh Kale Greens</h2>
@@ -54,9 +54,9 @@ const Popular = () => {
             12%
           </span>
           <img
-            src="/images/pngwing.com (12).png"
+            src="/images/pngwing.com (19).png"
             alt="popular-img"
-            className=" h-1/2 w-4/5"
+            className=" h-1/2"
           />
           <div className="popular-text text-center">
             <h2 className="font-bold">Fresh Kale Greens</h2>
@@ -94,7 +94,7 @@ const Popular = () => {
               <MdShoppingCart className=" text-green-700 mr-2" />Add
             </Link>
         </div><div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
-          <span className="absolute top-0 right-0 p-2 px-4 w-14 text-sm bg-yellow-200 text-yellow-900 font-bold">
+          <span className="absolute top-0 right-0 p-2 px-4 w-14 text-sm bg-yellow-300 text-yellow-900 font-bold">
             New
           </span>
           <img
@@ -160,7 +160,7 @@ const Popular = () => {
               <MdShoppingCart className=" text-green-700 mr-2" />Add
             </Link>
         </div><div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
-        <span className="absolute top-0 right-0 p-2 px-4 w-14 text-sm bg-yellow-200 text-yellow-900 font-bold">
+        <span className="absolute top-0 right-0 p-2 px-4 w-14 text-sm bg-yellow-300 text-yellow-900 font-bold">
             New
           </span>
           <img
