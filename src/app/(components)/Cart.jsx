@@ -11,7 +11,7 @@ const ProductDetail = () => {
   return (
     <>
       <Header />
-      <div className="container mx-auto p-4 md:p-8 poppins">
+      <div className="container mx-auto p-2 md:p-8 poppins">
         <div className="flex flex-col md:flex-row">
           <div className="w-full flex flex-col md:flex-row  justify-between  md:w-5/6 p-4">
           <div className="flex flex-col">
@@ -41,13 +41,13 @@ const ProductDetail = () => {
               Perfectly packaged for convenience, this mix is ideal for adding a
               splash of color and a burst of sweetness to your meals.{" "}
             </p>
-            <div className=" text-yellow-400 flex items-center space-x-4 text-xl">
+            <div className="w-full text-yellow-400 flex items-center space-x-4 text-xl">
               <FaStar />
               <FaStar />
               <FaStar />
               <FaStar />
               <FaStarHalf />
-              <p className=" font-bold text-2xl text-black">
+              <p className="flex items-center font-bold text-2xl text-black">
                 4.5
                 <span className=" text-sm font-normal ml-2">
                   &#40;7 reviews&#41;
