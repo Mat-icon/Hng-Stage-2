@@ -22,7 +22,7 @@ const ProductDetail = () => {
               height={350}
               className="p-4 bg-slate-50 h-4/6 shadow-md shadow-gray-300 rounded-md"
             />
-            <div className=" bg-slate-50 shadow-lg shadow-gray-400 p-4 rounded-lg mt-4">
+            <div className=" bg-slate-50 shadow-lg shadow-gray-400 p-6 rounded-lg mt-4">
               <h2 className="text-xl font-bold mb-2">Usage Tips</h2>
               <ul className="list-disc list-inside">
                 <li>Add to salads for a vibrant and nutritious touch</li>
@@ -115,8 +115,8 @@ const ProductDetail = () => {
         </div>
         <div className="mt-8">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold mb-4">You may also like</h2>
-            <div className="arrows space-x-4 flex items-center justify-end mt-2">
+            <h2 className="md:text-2xl font-bold mb-4 text-xl">You may also like</h2>
+            <div className="arrows space-x-4 flex items-center justify-end">
               <FaArrowLeft className=" w-8 text-gray-400 h-8 p-1 border-size rounded-full  border-gray-500 hover:text-green-500 hover:border-green-500 cursor-pointer" />
               <FaArrowRight className=" w-8 text-gray-400 h-8 p-1 border-size rounded-full  border-gray-500 hover:text-green-500 hover:border-green-500 cursor-pointer" />
             </div>
