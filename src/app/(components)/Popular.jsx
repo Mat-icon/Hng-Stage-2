@@ -41,7 +41,7 @@ const Popular = () => {
             <p className=" text-gray-400 line-through">$4300</p>
           
           </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex font-bold items-center text-green-700"
+              className="p-2 rounded-md text-sm flex  items-center text-green-700"
               style={{ background: "#79c74f60" }}
               
             >
@@ -64,7 +64,7 @@ const Popular = () => {
             <p className=" text-gray-400 line-through">$4300</p>
           
           </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex font-bold items-center text-green-700"
+              className="p-2 rounded-md text-sm flex  items-center text-green-700"
               style={{ background: "#79c74f60" }}
               
             >
@@ -86,7 +86,7 @@ const Popular = () => {
             <p className=" text-gray-400 line-through">$4300</p>
           
           </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex font-bold items-center text-green-700"
+              className="p-2 rounded-md text-sm flex  items-center text-green-700"
               style={{ background: "#79c74f60" }}
               
             >
@@ -108,7 +108,7 @@ const Popular = () => {
             <p className=" text-gray-400 line-through">$4300</p>
           
           </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex font-bold items-center text-green-700"
+              className="p-2 rounded-md text-sm flex  items-center text-green-700"
               style={{ background: "#79c74f60" }}
               
             >
@@ -130,7 +130,7 @@ const Popular = () => {
             <p className=" text-gray-400 line-through">$4300</p>
           
           </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex font-bold items-center text-green-700"
+              className="p-2 rounded-md text-sm flex  items-center text-green-700"
               style={{ background: "#79c74f60" }}
               
             >
@@ -152,7 +152,7 @@ const Popular = () => {
             <p className=" text-gray-400 line-through">$4300</p>
           
           </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex font-bold items-center text-green-700"
+              className="p-2 rounded-md text-sm flex  items-center text-green-700"
               style={{ background: "#79c74f60" }}
               
             >
@@ -174,7 +174,7 @@ const Popular = () => {
             <p className=" text-gray-400 line-through">$4300</p>
           
           </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex font-bold items-center text-green-700"
+              className="p-2 rounded-md text-sm flex  items-center text-green-700"
               style={{ background: "#79c74f60" }}
               
             >
@@ -196,7 +196,7 @@ const Popular = () => {
             <p className=" text-gray-400 line-through">$4300</p>
           
           </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex font-bold items-center text-green-700"
+              className="p-2 rounded-md text-sm flex  items-center text-green-700"
               style={{ background: "#79c74f60" }}
               
             >

@@ -62,7 +62,7 @@ const ProductDetail = () => {
               </span>
             </p>{" "}
             <Link
-              href="/cart"
+              href="/checkout"
               className="p-4 w-2/3 rounded-md text-sm flex justify-center items-center text-green-700"
               style={{ background: "#79c74f60" }}
             >
