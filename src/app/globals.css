@@ -91,3 +91,10 @@ html{
   color: #396520;
 }
 
+.add{
+  background: #79c74f60;
+}
+
+.add:hover{
+  transition: 0.5s ease-in-out;
+}

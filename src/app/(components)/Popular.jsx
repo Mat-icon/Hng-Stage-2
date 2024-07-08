@@ -9,20 +9,30 @@ const Popular = () => {
         Popular Product
       </h1>
       <ul className="flex mt-8 justify-center text-slate-400 space-x-4 md:space-x-16">
-      <li>
-          <Link href="/" className=' hover:text-green-500'>All</Link>
+        <li>
+          <Link href="/" className=" hover:text-green-500">
+            All
+          </Link>
         </li>
         <li>
-          <Link href="/" className=' hover:text-green-500'>Products</Link>
+          <Link href="/" className=" hover:text-green-500">
+            Products
+          </Link>
         </li>
         <li>
-          <Link href="/" className=' hover:text-green-500'>Deal</Link>
+          <Link href="/" className=" hover:text-green-500">
+            Deal
+          </Link>
         </li>
         <li>
-          <Link href="/" className=' hover:text-green-500'>New</Link>
+          <Link href="/" className=" hover:text-green-500">
+            New
+          </Link>
         </li>
         <li>
-          <Link href="/" className=' hover:text-green-500'>On Sale</Link>
+          <Link href="/" className=" hover:text-green-500">
+            On Sale
+          </Link>
         </li>
       </ul>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-10 gap-4">
@@ -39,15 +49,14 @@ const Popular = () => {
             <h2 className="font-bold">Fresh Kale Greens</h2>
             <p className=" text-green-600">₦4000</p>
             <p className=" text-gray-400 line-through">₦4300</p>
-          
-          </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex  items-center text-green-700"
-              style={{ background: "#79c74f60" }}
-              
-            >
-            
-              <MdShoppingCart className=" text-green-700 mr-2" />Add
-            </Link>
+          </div>{" "}
+          <Link
+            href="/cart"
+            className="p-2 rounded-md text-sm flex  items-center text-green-700 add hover:bg-gray-200"
+          >
+            <MdShoppingCart className=" text-green-700 mr-2" />
+            Add
+          </Link>
         </div>
         <div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
           <span className="absolute top-0 left-0 p-2 px-4 w-14 text-sm bg-green-500 text-white">
@@ -62,16 +71,16 @@ const Popular = () => {
             <h2 className="font-bold">Organic Baby Spinach</h2>
             <p className=" text-green-600">₦2500</p>
             <p className=" text-gray-400 line-through">₦2300</p>
-          
-          </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex  items-center text-green-700"
-              style={{ background: "#79c74f60" }}
-              
-            >
-            
-              <MdShoppingCart className=" text-green-700 mr-2" />Add
-            </Link>
-        </div><div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
+          </div>{" "}
+          <Link
+            href="/cart"
+            className="p-2 rounded-md text-sm flex  items-center text-green-700 add hover:bg-gray-200"
+          >
+            <MdShoppingCart className=" text-green-700 mr-2" />
+            Add
+          </Link>
+        </div>
+        <div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
           <span className="absolute top-0 left-0 p-2 px-4 w-14 text-sm bg-green-500 text-white">
             12%
           </span>
@@ -84,16 +93,16 @@ const Popular = () => {
             <h2 className="font-bold">Herb Infused Olive Oil</h2>
             <p className=" text-green-600">₦4000</p>
             <p className=" text-gray-400 line-through">₦4300</p>
-          
-          </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex  items-center text-green-700"
-              style={{ background: "#79c74f60" }}
-              
-            >
-            
-              <MdShoppingCart className=" text-green-700 mr-2" />Add
-            </Link>
-        </div><div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
+          </div>{" "}
+          <Link
+            href="/cart"
+            className="p-2 rounded-md text-sm flex  items-center text-green-700 add hover:bg-gray-200"
+          >
+            <MdShoppingCart className=" text-green-700 mr-2" />
+            Add
+          </Link>
+        </div>
+        <div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
           <span className="absolute top-0 right-0 p-2 px-4 w-14 text-sm bg-yellow-300 text-yellow-900 font-bold">
             New
           </span>
@@ -106,16 +115,16 @@ const Popular = () => {
             <h2 className="font-bold">Sweet Bell Hami Mix</h2>
             <p className=" text-green-600">₦4000</p>
             <p className=" text-gray-400 line-through">₦7300</p>
-          
-          </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex  items-center text-green-700"
-              style={{ background: "#79c74f60" }}
-              
-            >
-            
-              <MdShoppingCart className=" text-green-700 mr-2" />Add
-            </Link>
-        </div><div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
+          </div>{" "}
+          <Link
+            href="/cart"
+            className="p-2 rounded-md text-sm flex  items-center text-green-700 add hover:bg-gray-200"
+          >
+            <MdShoppingCart className=" text-green-700 mr-2" />
+            Add
+          </Link>
+        </div>
+        <div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
           <span className="absolute top-0 left-0 p-2 px-4 w-14 text-sm bg-green-500 text-white">
             12%
           </span>
@@ -128,16 +137,17 @@ const Popular = () => {
             <h2 className="font-bold">Fresh Green wafers</h2>
             <p className=" text-green-600">₦4000</p>
             <p className=" text-gray-400 line-through">₦6300</p>
-          
-          </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex  items-center text-green-700"
-              style={{ background: "#79c74f60" }}
-              
-            >
-            
-              <MdShoppingCart className=" text-green-700 mr-2" />Add
-            </Link>
-        </div><div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
+          </div>{" "}
+          <Link
+            href="/cart"
+            className="p-2 rounded-md text-sm flex  items-center text-green-700"
+            style={{ background: "#79c74f60" }}
+          >
+            <MdShoppingCart className=" text-green-700 mr-2" />
+            Add
+          </Link>
+        </div>
+        <div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
           <span className="absolute top-0 left-0 p-2 px-4 w-14 text-sm bg-green-500 text-white">
             12%
           </span>
@@ -150,17 +160,17 @@ const Popular = () => {
             <h2 className="font-bold">Farm-Fresh Tomatoes</h2>
             <p className=" text-green-600">₦4000</p>
             <p className=" text-gray-400 line-through">₦4300</p>
-          
-          </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex  items-center text-green-700"
-              style={{ background: "#79c74f60" }}
-              
-            >
-            
-              <MdShoppingCart className=" text-green-700 mr-2" />Add
-            </Link>
-        </div><div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
-        <span className="absolute top-0 right-0 p-2 px-4 w-14 text-sm bg-yellow-300 text-yellow-900 font-bold">
+          </div>{" "}
+          <Link
+            href="/cart"
+            className="p-2 rounded-md text-sm flex  items-center text-green-700 add hover:bg-gray-200"
+          >
+            <MdShoppingCart className=" text-green-700 mr-2" />
+            Add
+          </Link>
+        </div>
+        <div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
+          <span className="absolute top-0 right-0 p-2 px-4 w-14 text-sm bg-yellow-300 text-yellow-900 font-bold">
             New
           </span>
           <img
@@ -172,16 +182,16 @@ const Popular = () => {
             <h2 className="font-bold">Organic Zucchini Squash</h2>
             <p className=" text-green-600">₦4000</p>
             <p className=" text-gray-400 line-through">₦4300</p>
-          
-          </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex  items-center text-green-700"
-              style={{ background: "#79c74f60" }}
-              
-            >
-            
-              <MdShoppingCart className=" text-green-700 mr-2" />Add
-            </Link>
-        </div><div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
+          </div>{" "}
+          <Link
+            href="/cart"
+            className="p-2 rounded-md text-sm flex  items-center text-green-700 add hover:bg-gray-200"
+          >
+            <MdShoppingCart className=" text-green-700 mr-2" />
+            Add
+          </Link>
+        </div>
+        <div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
           <span className="absolute top-0 left-0 p-2 px-4 w-14 text-sm bg-green-500 text-white">
             12%
           </span>
@@ -194,15 +204,14 @@ const Popular = () => {
             <h2 className="font-bold">Crisp Romaine Lettuce</h2>
             <p className=" text-green-600">₦4000</p>
             <p className=" text-gray-400 line-through">₦4300</p>
-          
-          </div>    <Link href='/cart'
-              className="p-2 rounded-md text-sm flex  items-center text-green-700"
-              style={{ background: "#79c74f60" }}
-              
-            >
-            
-              <MdShoppingCart className=" text-green-700 mr-2" />Add
-            </Link>
+          </div>{" "}
+          <Link
+            href="/cart"
+            className="p-2 rounded-md text-sm flex  items-center text-green-700 add hover:bg-gray-200"
+          >
+            <MdShoppingCart className=" text-green-700 mr-2" />
+            Add
+          </Link>
         </div>
       </div>
     </div>

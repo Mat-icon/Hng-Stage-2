@@ -70,10 +70,10 @@ const ProductDetail = () => {
               </p>{" "}
               <Link
                 href="/checkout"
-                className="p-4 md:w-2/3 w-full rounded-md text-sm flex justify-center items-center text-green-700"
-                style={{ background: "#79c74f60" }}
+                className="p-4 md:w-2/3 w-full rounded-md text-sm flex justify-center items-center hover:bg-gray-100 add text-green-700"
+                
               >
-                <MdShoppingCart className=" text-green-700 mr-2" />
+                <MdShoppingCart className=" text-green-700 mr-2 " />
                 Add To Shopping Cart
               </Link>
             </div>

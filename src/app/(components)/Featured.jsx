@@ -14,8 +14,8 @@ const Featured = () => {
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 gap-2 md:gap-4 mt-4">
           <div
-            className="flex flex-col items-center p-8 rounded-md justify-center relative product-card"
-            style={{ background: "#79c74f60" }}
+            className="flex flex-col items-center p-8 rounded-md justify-center relative product-card add hover:bg-gray-100"
+           
           >
             <img src="/images/pngwing.com (5).png" alt="product" />
             <p className=" font-bold text-green-800 text-sm md:text-base lg:text-xl absolute bottom-2">
@@ -23,8 +23,8 @@ const Featured = () => {
             </p>
           </div>
           <div
-            className="flex flex-col items-center p-8 rounded-md justify-center relative product-card"
-            style={{ background: "#79c74f60" }}
+            className="flex flex-col items-center p-8 rounded-md justify-center relative product-card add hover:bg-gray-100"
+           
           >
             <img src="/images/pngwing.com (6).png" alt="product" />
             <p className=" font-bold text-green-800 text-sm md:text-base lg:text-xl absolute bottom-2">
@@ -32,8 +32,8 @@ const Featured = () => {
             </p>
           </div>
           <div
-            className="flex flex-col items-center p-8 rounded-md justify-center relative product-card"
-            style={{ background: "#79c74f60" }}
+            className="flex flex-col items-center p-8 rounded-md justify-center relative product-card add hover:bg-gray-100"
+          
           >
             <img src="/images/pngwing.com (7).png" alt="product" />
             <p className=" font-bold text-green-800 text-sm md:text-base lg:text-xl absolute bottom-2">
@@ -41,8 +41,8 @@ const Featured = () => {
             </p>
           </div>
           <div
-            className="flex flex-col items-center p-8 rounded-md justify-center relative product-card"
-            style={{ background: "#79c74f60" }}
+            className="flex flex-col items-center p-8 rounded-md justify-center relative product-card add  hover:bg-gray-100"
+            
           >
             <img src="/images/pngwing.com (8).png" alt="product" className="smoothie"/>
             <p className=" font-bold text-green-800 text-sm md:text-base lg:text-xl absolute bottom-2">
