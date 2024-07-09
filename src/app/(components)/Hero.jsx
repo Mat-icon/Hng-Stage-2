@@ -7,12 +7,14 @@ import { RiSecurePaymentLine } from 'react-icons/ri'
 const Hero = () => {
   return (
     <div id='home' className='w-full h-auto pb-4 relative   overflow-x-hidden'>
-      <div className="hero-image w-full h-screen">
+      <div className="hero-image w-full h-screen bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/images/Hero Page.jpg')" }}
+      >
       <div className="hero-content relative w-10/12 md:w-full text-left md:text-left top-20 md:top-32 left-8 md:left-16 text-black space-y-5">
         <span className=' hero-bold text-yellow-500 md:text-sm lg:text-base text-sm'>Taste the Freshness</span>
         <h1 className=' md:text-5xl lg:text-7xl  text-4xl font-bold'>Experience the <br/> True <span className=' text-green-700'>Taste of Fresh</span></h1>
         <p className=' text-gray-700 hero-bold pb-12 md:text-sm lg:text-base text-sm'>Farm-Fresh Vegetables Delivered Straight to Your Door</p>
-        <Link href='/'
+        <Link href='/products'
           className="p-4 px-16 rounded-md mt-12 md:text-sm lg:text-base"
           style={{ background: "#7AC74F", color: "white" }}
         >

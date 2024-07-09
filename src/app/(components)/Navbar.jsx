@@ -19,6 +19,7 @@ const Navbar = () => {
         <ul className=" inline-flex items-center space-x-8 md:text-xs lg:text-base">
           <li ><Link href='#home'className="flex items-center"  style={{ color: "#7AC74F" }}>Home <RiArrowDropDownLine className=" text-3xl"/></Link></li>
           <li><Link href='#categories'>Categories</Link></li>
+          <li><Link href='/products'>Products</Link></li>
           <li><Link href='#popular' className="flex items-center">Shop<RiArrowDropDownLine className=" text-3xl"/></Link></li>
           <li><Link href='#contact'>Contact</Link></li>
         </ul>

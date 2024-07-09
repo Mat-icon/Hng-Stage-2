@@ -13,12 +13,7 @@ html{
     font-style: normal;
   }
 
-.hero-image {
-  background-image: url("/images/Hero page.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
 
 .hero-bold {
   font-weight: 600;

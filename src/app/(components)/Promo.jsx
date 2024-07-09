@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 const Promo = () => {
   return (
     <div className="w-full h-5/6 flex flex-col-reverse md:flex-row items-center promo p-6">
@@ -16,12 +16,12 @@ const Promo = () => {
           Start your daily shopping with our exclusive offers and
           <br /> enjoy unbeatable freshness.
         </p>
-        <button
+        <Link href='/products'
           className="p-4 px-8 md:px-16 rounded-md mt-12"
           style={{ background: "#7AC74F", color: "white" }}
         >
           Shop Now and Save
-        </button>
+        </Link>
       </div>
     </div>
   );

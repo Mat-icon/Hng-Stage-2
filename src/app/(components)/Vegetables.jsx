@@ -182,7 +182,8 @@ const Vegetables = () => {
             
               <MdShoppingCart className=" text-green-700 mr-2" />Add
             </Link>
-        </div><div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
+        </div>
+        <div className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
           <span className="absolute top-0 left-0 p-2 px-4 w-14 text-sm bg-green-500 text-white">
             12%
           </span>
