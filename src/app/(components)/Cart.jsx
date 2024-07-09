@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Header from "./Header";
+import { MdArrowRight } from "react-icons/md";
 import {
-  FaArrowDown,
-  FaArrowDown19,
+  
   FaStar,
   FaStarHalf,
 } from "react-icons/fa6";
@@ -15,6 +15,9 @@ const ProductDetail = () => {
   return (
     <>
       <Header />
+      <div className="w-full h-14 md:p-4 flex space-x-4 pl-8 md:pl-16 items-center text-sm poppins">
+        <Link href='/'>Home</Link><MdArrowRight/><Link href='/cart' className=" text-green-500">Cart</Link>
+    </div>
       <div className="container mx-auto p-2 md:p-4 lg:p-8 poppins">
         <div className="flex flex-col md:flex-col lg:flex-row">
           <div className="w-full flex flex-col md:flex-row  justify-between  md:w-5/6 p-4">

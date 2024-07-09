@@ -12,13 +12,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FaApplePay } from "react-icons/fa6";
+import { MdArrowRight } from "react-icons/md";
 
 const Checkout = () => {
   const [activeTab, setActiveTab] = useState("Free");
   return (
     <div className="w-full h-auto poppins">
       <Header />
-
+      <div className="w-full h-14 md:p-4 flex space-x-4 pl-8 md:pl-16 items-center text-sm poppins">
+        <Link href="/">Home</Link>
+        <MdArrowRight />
+        <Link href="/cart">
+          Cart
+        </Link><MdArrowRight />
+        <Link href="/checkout" className=" text-green-500">
+          Checkout
+        </Link>
+      </div>
       <div className="w-full h-auto md:p-8 p-2 pb-2 container items-center mx-auto flex flex-col md:flex-col lg:flex-row space-y-8 md:space-x-4">
         <div className="lg:w-9/12 md:w-full w-full bg-slate-50 h-full shadow-md shadow-gray-300 p-2 md:p-4 rounded-lg">
           <div className="flex items-center pb-4 border-b border-slate-400">
@@ -158,7 +168,7 @@ const Checkout = () => {
               </div>
             </div>
             {activeTab === "Free" && (
-              <div >
+              <div>
                 <div className=" space-y-2">
                   <h3 className="text-gray-400 text-sm">
                     Delivery date: July 8th, 2024
@@ -247,54 +257,70 @@ const Checkout = () => {
                 </form>
               </div>
             )}
-            {activeTab === "Express" && <div >
-            <div className=" space-y-2">
-              <h3 className="text-gray-400 text-sm">
-                Delivery date: July 8th, 2024
-              </h3>
-              <h3>Card type</h3>
-              <div className="flex flex-col  w-full space-y-2 md:space-y-2 py-4 ">
-                <Link href='/' className=" bg-black p-2 rounded-md text-center flex items-center justify-center"><p className=" text-4xl text-white"><FaGooglePay/></p></Link>
-                <Link href='/' className=" bg-green-500 p-2 rounded-md text-center flex items-center justify-center"><p className=" text-4xl"><FaApplePay/></p></Link>
-            </div>
-            <form className="mt-4">
-              <label className="block">
-                <span className="text-gray-700">Name on card</span>
-                <input
-                  type="text"
-                  placeholder="Full name"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-4 text-sm"
-                />
-              </label>
-              <label className="block mt-4">
-                <span className="text-gray-700">Card Number</span>
-                <input
-                  type="text"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-sm p-4"
-                  placeholder="0000 0000 0000 0000"
-                />
-              </label>
-           
-              <div className="flex flex-col space-y-2 pt-6 border-t border-gray-400 mt-8">
-                <div className="flex items-center justify-between">
-                  <p>Subtotal</p>
-                  <p className="font-bold">₦4000.00</p>
-                </div>
-                <div className="flex items-center justify-between">
-                  <p>Delivery</p>
-                  <p className="font-bold">₦200.00</p>
-                </div>
-                <div className="flex items-center justify-between">
-                  <p>Total&#40;tax. incl&#41;</p>
-                  <p className="font-bold">₦5000.00</p>
+            {activeTab === "Express" && (
+              <div>
+                <div className=" space-y-2">
+                  <h3 className="text-gray-400 text-sm">
+                    Delivery date: July 8th, 2024
+                  </h3>
+                  <h3>Card type</h3>
+                  <div className="flex flex-col  w-full space-y-2 md:space-y-2 py-4 ">
+                    <Link
+                      href="/"
+                      className=" bg-black p-2 rounded-md text-center flex items-center justify-center"
+                    >
+                      <p className=" text-4xl text-white">
+                        <FaGooglePay />
+                      </p>
+                    </Link>
+                    <Link
+                      href="/"
+                      className=" bg-green-500 p-2 rounded-md text-center flex items-center justify-center"
+                    >
+                      <p className=" text-4xl">
+                        <FaApplePay />
+                      </p>
+                    </Link>
+                  </div>
+                  <form className="mt-4">
+                    <label className="block">
+                      <span className="text-gray-700">Name on card</span>
+                      <input
+                        type="text"
+                        placeholder="Full name"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-4 text-sm"
+                      />
+                    </label>
+                    <label className="block mt-4">
+                      <span className="text-gray-700">Card Number</span>
+                      <input
+                        type="text"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-sm p-4"
+                        placeholder="0000 0000 0000 0000"
+                      />
+                    </label>
+
+                    <div className="flex flex-col space-y-2 pt-6 border-t border-gray-400 mt-8">
+                      <div className="flex items-center justify-between">
+                        <p>Subtotal</p>
+                        <p className="font-bold">₦4000.00</p>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p>Delivery</p>
+                        <p className="font-bold">₦200.00</p>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p>Total&#40;tax. incl&#41;</p>
+                        <p className="font-bold">₦5000.00</p>
+                      </div>
+                    </div>
+                    <button className="mt-4 bg-lime-600 text-white p-4 font-bold rounded-md w-full text-lg hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
+                      Checkout <span className="ml-2">₦5,000</span>
+                    </button>
+                  </form>
                 </div>
               </div>
-              <button className="mt-4 bg-lime-600 text-white p-4 font-bold rounded-md w-full text-lg hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
-                Checkout <span className="ml-2">₦5,000</span>
-              </button>
-            </form>
-          </div>
-          </div>}
+            )}
           </div>
         </div>
       </div>
