@@ -7,14 +7,7 @@ const products = [
     discount: 12,
     image: "pngwing.com (12).png",
   },
-  {
-    id: 2,
-    name: "Sweet Bell Hami Mix",
-    price: 4000,
-    discountedPrice: 6000,
-    discount: 10,
-    image: "pngwing.com (14).png",
-  },
+
   {
     id: 3,
     name: "Herb Infused Olive Oil",
@@ -40,14 +33,7 @@ const products = [
     discount: 12,
     image: "pngwing.com (17).png",
   },
-  {
-    id: 6,
-    name: "Organic Baby Spinach",
-    price: 5000,
-    discountedPrice: 7000,
-    discount: 12,
-    image: "pngwing.com (13).png",
-  },
+
   {
     id: 7,
     name: "Garden Fresh Eggplants",
@@ -64,21 +50,14 @@ const products = [
     discount: "New",
     image: "pngwing.com (44).png",
   },
-  {
-    id: 9,
-    name: "Organic Baby Spinach",
-    price: 5000,
-    discountedPrice: 7000,
-    discount: 12,
-    image: "pngwing.com (13).png",
-  },
+
   {
     id: 10,
     name: "Farm-Fresh Watermelon",
     price: 7000,
     discountedPrice: 10000,
     discount: 12,
-    image: "/images/farm-fresh-watermelon.png",
+    image: "pngwing.com (43).png",
   },
   {
     id: 11,
@@ -86,7 +65,7 @@ const products = [
     price: 4000,
     discountedPrice: 7000,
     discount: "New",
-    image: "/images/cantaloupe-melon.png",
+    image: "pngwing.com (22).png",
   },
   {
     id: 12,
@@ -94,7 +73,7 @@ const products = [
     price: 750,
     discountedPrice: 1500,
     discount: 12,
-    image: "/images/chobani-greek-cuisine.png",
+    image: "1.png",
   },
   {
     id: 13,
@@ -102,7 +81,7 @@ const products = [
     price: 7000,
     discountedPrice: 9500,
     discount: 12,
-    image: "/images/chinese-steamed-eggs.png",
+    image: "2.png",
   },
   {
     id: 14,
@@ -110,7 +89,7 @@ const products = [
     price: 2000,
     discountedPrice: 3500,
     discount: 12,
-    image: "/images/fresh-honey-jar.png",
+    image: "3.png",
   },
   {
     id: 15,
@@ -118,7 +97,7 @@ const products = [
     price: 2000,
     discountedPrice: 3500,
     discount: 12,
-    image: "/images/healthy-yellow-banana.png",
+    image: "4.png",
   },
   {
     id: 16,
@@ -126,7 +105,7 @@ const products = [
     price: 3000,
     discountedPrice: 3500,
     discount: 12,
-    image: "/images/fresh-pineapple.png",
+    image: "6.png",
   },
   {
     id: 17,
@@ -134,7 +113,7 @@ const products = [
     price: 1200,
     discountedPrice: 2500,
     discount: 6,
-    image: "/images/non-fat-soya-milk.png",
+    image: "7.png",
   },
   {
     id: 18,
@@ -142,7 +121,7 @@ const products = [
     price: 2000,
     discountedPrice: 3500,
     discount: 2,
-    image: "/images/honeycrisp-apples.png",
+    image: "8.png",
   },
   {
     id: 19,
@@ -150,7 +129,7 @@ const products = [
     price: 7000,
     discountedPrice: 10000,
     discount: 12,
-    image: "/images/smoothie-spinach-leaf.png",
+    image: "9.png",
   },
   {
     id: 20,
@@ -158,7 +137,7 @@ const products = [
     price: 1200,
     discountedPrice: 1800,
     discount: 12,
-    image: "/images/celery-vegetable.png",
+    image: "10.png",
   },
   {
     id: 21,
@@ -166,7 +145,7 @@ const products = [
     price: 2000,
     discountedPrice: 3500,
     discount: 7,
-    image: "/images/cabbage-cauliflower.png",
+    image: "12.png",
   },
   {
     id: 22,
@@ -174,7 +153,7 @@ const products = [
     price: 2000,
     discountedPrice: 3500,
     discount: 12,
-    image: "/images/peperoncino-chili.png",
+    image: "13.png",
   },
   {
     id: 23,
@@ -182,7 +161,7 @@ const products = [
     price: 1000,
     discountedPrice: 1500,
     discount: 5,
-    image: "/images/cucumber.png",
+    image: "14.png",
   },
   {
     id: 24,
@@ -190,7 +169,7 @@ const products = [
     price: 3000,
     discountedPrice: 6500,
     discount: 5,
-    image: "/images/cantaloupe-melon.png",
+    image: "5.png",
   },
   {
     id: 25,
@@ -198,7 +177,7 @@ const products = [
     price: 800,
     discountedPrice: 1500,
     discount: 4,
-    image: "/images/fresh-lemon.png",
+    image: "15.png",
   },
   {
     id: 26,
@@ -206,7 +185,7 @@ const products = [
     price: 2000,
     discountedPrice: 2500,
     discount: 13,
-    image: "/images/smoothie-berry.png",
+    image: "16.png",
   },
   {
     id: 27,
@@ -214,7 +193,7 @@ const products = [
     price: 5000,
     discountedPrice: 6500,
     discount: 9,
-    image: "/images/grapes.png",
+    image: "17.png",
   },
   {
     id: 28,
@@ -222,7 +201,7 @@ const products = [
     price: 7000,
     discountedPrice: 8500,
     discount: 10,
-    image: "/images/white-rice-cereal.png",
+    image: "18.png",
   },
 ];
 
