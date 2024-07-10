@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { MdFilterList, MdSearch, MdShoppingCart } from "react-icons/md";
+import { MdCamera, MdFilterList, MdSearch, MdShoppingCart } from "react-icons/md";
 import products from "./Products";
 import { useState } from "react";
 
@@ -120,12 +120,25 @@ const ProductList = () => {
           </ul>
         </div>
         <div className="flex space-x-4 items-center">
-          <MdSearch className=" text-lg" />
-          <MdFilterList className=" text-lg" />
+         
+          <MdFilterList className=" text-lg cursor-pointer" />
+          <MdCamera className=" text-lg cursor-pointer" />
         </div>
       </div>
-
-
+      <form className="lg:w-4/6 w-full mt-8 flex">
+          <input
+            placeholder="search for product"
+            type="text"
+            className="md:p-4 p-2 rounded-md text-xs w-4/6 bg-slate-50 "
+            style={{ border: "1px solid #7AC74F" }}
+          />
+          <button
+            className="md:p-4 p-2 rounded-md ml-3 text-xs"
+            style={{ background: "#7AC74F", color: "white" }}
+          >
+            Search
+          </button>
+</form>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
         {products.map((product) => (

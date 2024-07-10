@@ -1,157 +1,145 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { FaArrowLeft, FaGooglePay, FaMinus } from "react-icons/fa6";
+import { FaArrowLeft, FaGooglePay, FaMinus, FaApplePay } from "react-icons/fa6";
 import {
   MdAdd,
   MdDeleteOutline,
   MdOutlineKeyboardArrowDown,
+  MdArrowRight,
 } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { FaApplePay } from "react-icons/fa6";
-import { MdArrowRight } from "react-icons/md";
 
 const Checkout = () => {
   const [activeTab, setActiveTab] = useState("Free");
+
+  const products = [
+    {
+      id: 1,
+      name: "Sweet Bell Harri Mix",
+      price: 4000,
+      stockStatus: "In stock",
+      quantity: 2,
+      imageUrl: "/images/pngwing.com (14).png",
+    },
+    {
+      id: 2,
+      name: "Sweet Bell Harri Mix",
+      price: 4000,
+      stockStatus: "In stock",
+      quantity: 2,
+      imageUrl: "/images/pngwing.com (14).png",
+    },
+    {
+      id: 3,
+      name: "Sweet Bell Harri Mix",
+      price: 4000,
+      stockStatus: "In stock",
+      quantity: 2,
+      imageUrl: "/images/pngwing.com (14).png",
+    },
+    {
+      id: 4,
+      name: "Fresh Kale Greens",
+      price: 2000,
+      stockStatus: "Available in 3 days",
+      quantity: 2,
+      imageUrl: "/images/pngwing.com (12).png",
+    },
+    {
+      id: 4,
+      name: "Fresh Kale Greens",
+      price: 2000,
+      stockStatus: "Available in 3 days",
+      quantity: 2,
+      imageUrl: "/images/pngwing.com (12).png",
+    },
+    {
+      id: 5,
+      name: "Fresh Green Wafers",
+      price: 4000,
+      stockStatus: "Out of stock",
+      quantity: 2,
+      imageUrl: "/images/pngwing.com (15).png",
+    },
+  ];
+
   return (
-    <div className="w-full h-auto poppins">
+    <div className="w-full h-auto lg:h-200 poppins">
       <Header />
       <div className="w-full h-14 md:p-4 flex space-x-4 pl-8 md:pl-16 items-center text-sm poppins">
         <Link href="/">Home</Link>
         <MdArrowRight />
-        <Link href="/cart">
-          Cart
-        </Link><MdArrowRight />
-        <Link href="/checkout" className=" text-green-500">
+        <Link href="/cart">Cart</Link>
+        <MdArrowRight />
+        <Link href="/checkout" className="text-green-500">
           Checkout
         </Link>
       </div>
-      <div className="w-full h-auto md:p-8 p-2 pb-2 container items-center mx-auto flex flex-col md:flex-col lg:flex-row space-y-8 md:space-x-4">
-        <div className="lg:w-9/12 md:w-full w-full bg-slate-50 h-full shadow-md shadow-gray-300 p-2 md:p-4 rounded-lg">
+      <div className="w-full h-4/6 md:p-8 p-2 pb-2 container items-center mx-auto flex flex-col md:flex-col lg:flex-row space-y-8 md:space-x-4">
+        <div className="lg:w-9/12 md:w-full w-full bg-slate-50 h-full shadow-md shadow-gray-300 p-2 md:p-4 rounded-lg ">
           <div className="flex items-center pb-4 border-b border-slate-400">
             <Link href="/cart">
-              <FaArrowLeft className=" cursor-pointer" />
+              <FaArrowLeft className="cursor-pointer" />
             </Link>
-            <h2 className=" ml-6 text-sm md:text-base">Continue Shopping</h2>
+            <h2 className="ml-6 text-sm md:text-base">Continue Shopping</h2>
           </div>
-          <div className=" space-y-2 p-4 text-x md:text-base">
+          <div className="space-y-2 p-4 text-x md:text-base">
             <h2>Cart</h2>
             <div className="flex items-center justify-between">
-              <p>You have 4 items in your cart</p>
+              <p>You have {products.length} items in your cart</p>
               <p className="flex items-center font-medium space-x-4">
                 Sort by :{" "}
-                <MdOutlineKeyboardArrowDown className=" cursor-pointer font-normal" />
+                <MdOutlineKeyboardArrowDown className="cursor-pointer font-normal" />
               </p>
             </div>
           </div>
-          <div className=" md:p-4 h-4/5 space-y-2">
-            <div className="bg-white md:p-6 p-2 h-1/3  shadow rounded-md flex justify-between space-x-4 relative">
-              <div className="flex items-center space-x-2 md:space-x-6">
-                <Image
-                  src="/images/pngwing.com (14).png"
-                  alt="Farm-Fresh Tomatoes"
-                  width={200}
-                  height={100}
-                  className="rounded-lg w-16 h-24 md:w-24 p-4 md:h-32 bg-green-100"
-                />
-                <div className="flex flex-col space-y-2">
-                  <h3 className="font-semibold md:text-lg text-xs">
-                    Sweet Bell Harri Mix
-                  </h3>
-                  <div className="price flex md:text-base text-x items-center space-x-4 text-gray-500">
-                    <p>₦4000</p>
-                    <span className=" text-green-500">In stock</span>
-                  </div>
-                  <div className="quantity md:text-base text-sm space-x-2 md:space-x-4 flex items-center">
-                    <FaMinus className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" />
-                    <span>2</span>
-                    <MdAdd className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" />
-                    <span className="text-x">X</span>
-                    <p className=" text-x">₦4000</p>
-                  </div>
-                </div>
-              </div>
-
-              <h1 className=" text-sm md:text-2xl font-bold flex flex-col items-center absolute right-5 bottom-5">
-                ₦4000{" "}
-                <MdDeleteOutline className=" text-sm md:text-3xl mt-6 text-red-500 cursor-pointer" />
-              </h1>
-            </div>
-
-            <div className="bg-white md:p-6 p-2 h-1/3  shadow rounded-md flex justify-between space-x-4 relative">
-              <div className="flex items-center space-x-2 md:space-x-6">
-                <Image
-                  src="/images/pngwing.com (12).png"
-                  alt="Farm-Fresh Tomatoes"
-                  width={200}
-                  height={100}
-                  className="rounded-lg w-16 h-24 md:w-24 p-4 md:h-32 bg-green-100"
-                />
-                <div className="flex flex-col space-y-2">
-                  <h3 className="font-semibold md:text-lg text-xs">
-                    Fresh Kale Greens
-                  </h3>
-                  <div className="price flex md:text-base text-x items-center space-x-2 md:space-x-4 text-gray-500">
-                    <p>₦2000</p>
-                    <span className=" text-gray-500">avaliable in 3 days</span>
-                  </div>
-                  <div className="quantity md:text-base text-sm space-x-2 md:space-x-4 flex items-center">
-                    <FaMinus className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" />
-                    <span>2</span>
-                    <MdAdd className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" />
-                    <span className=" text-x">X</span>
-                    <p className=" text-x">₦4000</p>
+          <div className="md:p-4 md:h-3/5 lg:h-4/5   space-y-2 overflow-y-scroll">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="bg-white md:p-6 p-2 h-1/3 shadow rounded-md flex justify-between space-x-4 relative"
+              >
+                <div className="flex items-center space-x-2 md:space-x-6">
+                  <Image
+                    src={product.imageUrl}
+                    alt={product.name}
+                    width={200}
+                    height={100}
+                    className="rounded-lg w-16 h-24 md:w-24 p-4 md:h-32 bg-green-100"
+                  />
+                  <div className="flex flex-col space-y-2">
+                    <h3 className="font-semibold md:text-lg text-xs">
+                      {product.name}
+                    </h3>
+                    <div className="price flex md:text-base text-x items-center space-x-4 text-gray-500">
+                      <p>₦{product.price}</p>
+                      <span className="text-green-500">{product.stockStatus}</span>
+                    </div>
+                    <div className="quantity md:text-base text-sm space-x-2 md:space-x-4 flex items-center">
+                      <FaMinus className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" />
+                      <span>{product.quantity}</span>
+                      <MdAdd className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" />
+                      <span className="text-x">X</span>
+                      <p className="text-x">₦{product.price}</p>
+                    </div>
                   </div>
                 </div>
+                <h1 className="text-sm md:text-2xl font-bold flex flex-col items-center absolute right-5 bottom-5">
+                  ₦{product.price}{" "}
+                  <MdDeleteOutline className="text-sm md:text-3xl mt-6 text-red-500 cursor-pointer" />
+                </h1>
               </div>
-
-              <h1 className=" text-sm md:text-2xl font-bold flex flex-col items-center absolute right-5 bottom-5 text-gray-400">
-                ₦4000{" "}
-                <MdDeleteOutline className=" text-sm md:text-3xl mt-6 text-red-500 cursor-pointer" />
-              </h1>
-            </div>
-            <div className="bg-white md:p-6 p-2 h-1/3  shadow rounded-md flex justify-between space-x-4 relative">
-              <div className="flex items-center space-x-2 md:space-x-6">
-                <Image
-                  src="/images/pngwing.com (15).png"
-                  alt="Farm-Fresh Tomatoes"
-                  width={200}
-                  height={100}
-                  className="rounded-lg w-16 h-24 md:w-24 p-4 md:h-32 bg-green-100"
-                />
-                <div className="flex flex-col space-y-2">
-                  <h3 className="font-semibold md:text-lg text-xs">
-                    Fresh Green Wafers
-                  </h3>
-                  <div className="price flex md:text-base text-x items-center space-x-4 text-gray-500">
-                    <p>₦4000</p>
-                    <span className=" text-red-500">Out of stock</span>
-                  </div>
-                  <div className="quantity md:text-base text-sm space-x-2 md:space-x-4 flex items-center">
-                    <FaMinus className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" />
-                    <span>2</span>
-                    <MdAdd className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" />
-                    <span className=" text-x">X</span>
-                    <p className=" text-x">₦4000</p>
-                  </div>
-                </div>
-              </div>
-
-              <h1 className=" text-sm md:text-2xl font-bold flex flex-col items-center absolute right-5 bottom-5 text-gray-400">
-                ₦7000{" "}
-                <MdDeleteOutline className=" text-sm md:text-3xl mt-6 text-red-500 cursor-pointer" />
-              </h1>
-            </div>
+            ))}
           </div>
         </div>
         <div className="md:w-full lg:w-4/12 w-full">
-          <div className="bg-slate-50 p-4 shadow-md rounded-md space-y-6">
+          <div className="bg-slate-50 p-4 shadow-md rounded-md space-y-6 ">
             <div className="w-full bg-gray-200 rounded-lg h-16 flex items-center justify-center space-x-2 py-0 px-2">
               <div
-                className={`font-bold w-1/2 h-4/5 rounded-md text-center p-2 cursor-pointer text-lg ${
+                className={`font-semibold w-1/2 h-4/5 rounded-md text-center p-2 cursor-pointer text-lg ${
                   activeTab === "Free" ? "bg-slate-50" : " bg-transparent"
                 }`}
                 onClick={() => setActiveTab("Free")}
@@ -159,7 +147,7 @@ const Checkout = () => {
                 Free
               </div>
               <div
-                className={`font-bold w-1/2 h-4/5 rounded-md text-center p-2 cursor-pointer text-lg ${
+                className={`font-semibold w-1/2 h-4/5 rounded-md text-center p-2 cursor-pointer text-lg ${
                   activeTab === "Express" ? "bg-slate-50" : ""
                 }`}
                 onClick={() => setActiveTab("Express")}
@@ -169,7 +157,7 @@ const Checkout = () => {
             </div>
             {activeTab === "Free" && (
               <div>
-                <div className=" space-y-2">
+                <div className="space-y-2">
                   <h3 className="text-gray-400 text-sm">
                     Delivery date: July 8th, 2024
                   </h3>
@@ -225,7 +213,7 @@ const Checkout = () => {
                       <input
                         type="text"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-4 text-sm"
-                        placeholder="mm/yy"
+                        placeholder="MM/YY"
                       />
                     </label>
                     <label className="block">
@@ -233,31 +221,44 @@ const Checkout = () => {
                       <input
                         type="text"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-4 text-sm"
-                        placeholder="123"
+                        placeholder="000"
                       />
                     </label>
                   </div>
-                  <div className="flex flex-col space-y-2 pt-6 border-t border-gray-400 mt-8">
-                    <div className="flex items-center justify-between">
-                      <p>Subtotal</p>
-                      <p className="font-bold">₦4000.00</p>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <p>Delivery</p>
-                      <p className="font-bold">₦200.00</p>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <p>Total&#40;tax. incl&#41;</p>
-                      <p className="font-bold">₦5000.00</p>
-                    </div>
+                  <div className="flex items-center mt-4">
+                    <input
+                      id="remember-me"
+                      type="checkbox"
+                      className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <label
+                      htmlFor="remember-me"
+                      className="ml-2 block text-sm text-gray-900"
+                    >
+                      Remember me
+                    </label>
                   </div>
-                  <button className="mt-4 bg-lime-600 text-white p-4 font-bold rounded-md w-full text-lg hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
-                    Checkout <span className="ml-2">₦5,000</span>
-                  </button>
+                  <div className="flex flex-col space-y-2 pt-6 border-t border-gray-400 mt-8">
+                      <div className="flex items-center justify-between">
+                        <p>Subtotal</p>
+                        <p className="font-bold">₦4000.00</p>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p>Delivery</p>
+                        <p className="font-bold">₦200.00</p>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p>Total&#40;tax. incl&#41;</p>
+                        <p className="font-bold">₦5000.00</p>
+                      </div>
+                    </div>
+                    <button className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
+                      Checkout <span className="ml-2">₦5,000</span>
+                    </button>
                 </form>
               </div>
             )}
-            {activeTab === "Express" && (
+               {activeTab === "Express" && (
               <div>
                 <div className=" space-y-2">
                   <h3 className="text-gray-400 text-sm">
@@ -314,7 +315,7 @@ const Checkout = () => {
                         <p className="font-bold">₦5000.00</p>
                       </div>
                     </div>
-                    <button className="mt-4 bg-lime-600 text-white p-4 font-bold rounded-md w-full text-lg hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
+                    <button className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
                       Checkout <span className="ml-2">₦5,000</span>
                     </button>
                   </form>
