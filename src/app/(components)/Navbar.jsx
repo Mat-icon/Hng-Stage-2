@@ -2,7 +2,13 @@ import Link from "next/link";
 import React from "react";
 import {  MdArrowForward, MdWindow } from "react-icons/md";
 import { RiArrowDropDownLine } from "react-icons/ri";
+
+
+
 const Navbar = () => {
+
+
+
   return (
     <div className="md:sticky top-0 w-full z-10 hidden md:flex items-center justify-between bg-white md:px-4 md:space-x-2 lg:space-x-0 lg:px-16 py-3 border-b border-slate-200">
       <div className="logo flex items-center">
