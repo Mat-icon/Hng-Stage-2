@@ -6,6 +6,24 @@ import { useState } from "react";
 
 const ProductList = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState(products);
+
+  const [query, setQuery] = useState('');
+
+  const handleInputChange = (e) => {
+    const newQuery = e.target.value;
+    setQuery(newQuery);
+    handleSearch(newQuery); // Call the onSearch function with the current query
+  };
+
+  const handleSearch = (query) => {
+    // Filter the products based on the search query
+    const result = products.filter(product =>
+      product.name.toLowerCase().includes(query.toLowerCase())
+    );
+    // Update the filtered products state
+    setFilteredProducts(result);
+  };
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -131,17 +149,20 @@ const ProductList = () => {
             type="text"
             className="md:p-4 p-2 rounded-md text-xs w-4/6 bg-slate-50 "
             style={{ border: "1px solid #7AC74F" }}
+            value={query}
+            onChange={handleInputChange}
           />
           <button
             className="md:p-4 p-2 rounded-md ml-3 text-xs"
             style={{ background: "#7AC74F", color: "white" }}
+            onClick={handleInputChange}
           >
             Search
           </button>
 </form>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <div
             key={product.id}
             className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden"
