@@ -59,7 +59,7 @@ const Checkout = ({pricePerUnit}) => {
       <div className="w-full h-14 md:p-4 flex space-x-4 pl-8 md:pl-16 items-center text-sm poppins">
         <Link href="/">Home</Link>
         <MdArrowRight />
-        <Link href="/cart">Cart</Link>
+        <Link href={`/cart?id=${product.id}`} >Cart</Link>
         <MdArrowRight />
         <Link href="/checkout" className="text-green-500">
           Checkout
@@ -68,7 +68,7 @@ const Checkout = ({pricePerUnit}) => {
       <div className="w-full h-4/6 md:p-8 p-2 pb-2 container items-center mx-auto flex flex-col md:flex-col lg:flex-row space-y-8 md:space-x-4">
         <div className="lg:w-9/12  md:w-full w-full bg-slate-50 h-full shadow-md shadow-gray-300 p-2 md:p-4 rounded-lg">
           <div className="flex items-center pb-4 border-b border-slate-400">
-            <Link href="/cart">
+            <Link  href={`/cart?id=${product.id}`}>
               <FaArrowLeft className="cursor-pointer" />
             </Link>
             <h2 className="ml-6 text-sm md:text-base">Continue Shopping</h2>
