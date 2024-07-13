@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { FaArrowLeft, FaGooglePay, FaMinus, FaApplePay } from "react-icons/fa6";
@@ -12,48 +13,45 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-const Checkout = () => {
+const Checkout = ({pricePerUnit}) => {
   const [activeTab, setActiveTab] = useState("Free");
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: "Sweet Bell Harri Mix",
-      price: 4000,
-      stockStatus: "In stock",
-      quantity: 2,
-      imageUrl: "/images/pngwing.com (14).png",
-    },
-    {
-      id: 2,
-      name: "Sweet Bell Harri Mix",
-      price: 4000,
-      stockStatus: "In stock",
-      quantity: 2,
-      imageUrl: "/images/pngwing.com (14).png",
-    },
-    
-    // ...other products
-  ]);
+  const [products, setProducts] = useState([]);
+  const params = useSearchParams();
+  const id = params.get("id");
+  const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
-  const handleIncrease = (id) => {
-    setProducts(prevProducts => 
-      prevProducts.map(product =>
-        product.id === id ? { ...product, quantity: product.quantity + 1 } : product
-      )
-    );
+  const increaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
   };
 
-  const handleDecrease = (id) => {
-    setProducts(prevProducts => 
-      prevProducts.map(product =>
-        product.id === id ? { ...product, quantity: Math.max(1, product.quantity - 1) } : product
-      )
-    );
+  const reduceQuantity = () => {
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1)); // Prevent quantity from going below 1
   };
 
-  const calculateTotalPrice = () => {
-    return products.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
-  };
+  const calculateTotalPrice = quantity * pricePerUnit;
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const res = await fetch(
+          `https://timbu-get-single-product.reavdev.workers.dev/${id}?organization_id=7101c48ff6214e71a6cfff321ff556aa&Appid=MGUL2NAI5DLU5GH&Apikey=8ecfeb5549904529afd093898202424a20240712121850955434`
+        );
+        const data = await res.json();
+        setProduct(data);
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+      }
+    };
+
+    if (id) {
+      fetchProductDetails();
+    }
+  }, [id]);
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="w-full h-auto lg:h-200 poppins">
@@ -78,7 +76,7 @@ const Checkout = () => {
           <div className="space-y-2 p-4 text-x md:text-base">
             <h2>Cart</h2>
             <div className="flex items-center justify-between">
-              <p>You have {products.length} items in your cart</p>
+              <p>You have 1 items in your cart</p>
               <p className="flex items-center font-medium space-x-4">
                 Sort by :{" "}
                 <MdOutlineKeyboardArrowDown className="cursor-pointer font-normal" />
@@ -86,46 +84,58 @@ const Checkout = () => {
             </div>
           </div>
           <div className="md:p-4 md:h-3/5 lg:h-4/5 space-y-2 overflow-y-scroll">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="bg-white md:p-6 p-2 h-1/3 shadow rounded-md flex justify-between space-x-4 relative"
-              >
-                <div className="flex items-center space-x-2 md:space-x-6">
-                  <Image
-                    src={product.imageUrl}
-                    alt={product.name}
-                    width={200}
-                    height={100}
-                    className="rounded-lg w-16 h-24 md:w-24 p-4 md:h-32 bg-green-100"
-                  />
-                  <div className="flex flex-col space-y-2">
-                    <h3 className="font-semibold md:text-lg text-xs">
-                      {product.name}
-                    </h3>
-                    <div className="price flex md:text-base text-x items-center space-x-4 text-gray-500">
-                      <p>₦{product.price}</p>
-                      <span className="text-green-500">{product.stockStatus}</span>
-                    </div>
-                    <div className="quantity md:text-base text-sm space-x-2 md:space-x-4 flex items-center">
-                      <FaMinus className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" onClick={() => handleDecrease(product.id)} />
-                      <span>{product.quantity}</span>
-                      <MdAdd className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" onClick={() => handleIncrease(product.id)} />
-                      <span className="text-x">X</span>
-                      <p className="text-x">₦{(product.price * product.quantity).toFixed(2)}</p>
-                    </div>
+            <div
+              key={product.id}
+              className="bg-white md:p-6 p-2 h-1/3 shadow rounded-md flex justify-between space-x-4 relative"
+            >
+              <div className="flex items-center space-x-2 md:space-x-6">
+                <img
+                  src={`https://api.timbu.cloud/images/${product.photos[0].url}`}
+                  alt={product.name}
+                  width={200}
+                  height={100}
+                  className="rounded-lg w-16 h-24 md:w-24 p-4 md:h-32 bg-green-100"
+                />
+                <div className="flex flex-col space-y-2">
+                  <h3 className="font-semibold md:text-lg text-xs">
+                    {product.name}
+                  </h3>
+                  <div className="price flex md:text-base text-x items-center space-x-4 text-gray-500">
+                    <p>
+                      {" "}
+                      ₦{product.current_price}
+                    </p>
+                    <span className="text-green-500">
+                      {product.stockStatus}
+                    </span>
+                  </div>
+                  <div className="quantity md:text-base text-sm space-x-2 md:space-x-4 flex items-center">
+                    <FaMinus
+                      className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer"
+                      onClick={reduceQuantity}
+                    />
+                    <span>{quantity}</span>
+                    <MdAdd
+                      className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer"
+                      onClick={increaseQuantity}
+                    />
+                    <span className="text-x">X</span>
+                    <p className="text-x">
+                      ₦{(product.current_price * quantity).toFixed(2)}
+                    </p>
                   </div>
                 </div>
-                <h1 className="text-sm md:text-2xl font-bold flex flex-col items-center absolute right-5 bottom-5">
-                  ₦{(product.price * product.quantity).toFixed(2)}
-                  <MdDeleteOutline className="text-sm md:text-3xl mt-6 text-red-500 cursor-pointer" />
-                </h1>
               </div>
-            ))}
+              <h1 className="text-sm md:text-2xl font-bold flex flex-col items-center absolute right-5 bottom-5">
+              ₦{(product.current_price * quantity).toFixed(2)}
+                <MdDeleteOutline className="text-sm md:text-3xl mt-6 text-red-500 cursor-pointer" />
+              </h1>
+            </div>
           </div>
-         
-            <h3 className="font-semibold md:text-base text-xs pt-4 md:pt-0">Total: ₦{calculateTotalPrice()}</h3>
-      
+
+          <h3 className="font-semibold md:text-base text-xs pt-4 md:pt-0">
+            Total: ₦{calculateTotalPrice.toFixed(2)}
+          </h3>
         </div>
 
         <div className="md:w-full lg:w-4/12 w-full">
@@ -232,26 +242,27 @@ const Checkout = () => {
                     </label>
                   </div>
                   <div className="flex flex-col space-y-2 pt-6 border-t border-gray-400 mt-8">
-                      <div className="flex items-center justify-between">
-                        <p>Subtotal</p>
-                        <p className="font-bold">₦4000.00</p>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <p>Delivery</p>
-                        <p className="font-bold">₦200.00</p>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <p>Total&#40;tax. incl&#41;</p>
-                        <p className="font-bold">₦5000.00</p>
-                      </div>
+                    <div className="flex items-center justify-between">
+                      <p>Subtotal</p>
+                      <p className="font-bold">₦4000.00</p>
                     </div>
-                    <button className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
-                      Checkout <span className="ml-2">₦{calculateTotalPrice()}</span>
-                    </button>
+                    <div className="flex items-center justify-between">
+                      <p>Delivery</p>
+                      <p className="font-bold">₦200.00</p>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <p>Total&#40;tax. incl&#41;</p>
+                      <p className="font-bold">₦5000.00</p>
+                    </div>
+                  </div>
+                  <button className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
+                    Checkout{" "}
+                    <span className="ml-2">₦{calculateTotalPrice.toFixed(2)}</span>
+                  </button>
                 </form>
               </div>
             )}
-               {activeTab === "Express" && (
+            {activeTab === "Express" && (
               <div>
                 <div className=" space-y-2">
                   <h3 className="text-gray-400 text-sm">
@@ -309,7 +320,8 @@ const Checkout = () => {
                       </div>
                     </div>
                     <button className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
-                      Checkout <span className="ml-2">₦{calculateTotalPrice()}</span>
+                      Checkout{" "}
+                      <span className="ml-2">₦{calculateTotalPrice.toFixed(2)}</span>
                     </button>
                   </form>
                 </div>

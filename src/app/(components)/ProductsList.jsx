@@ -5,6 +5,8 @@ import fetchProducts from "../api/proxy";
 import { MdCamera, MdFilterList, MdSearch, MdShoppingCart } from "react-icons/md";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Header from "./Header";
+
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -67,32 +69,19 @@ const ProductList = () => {
   };
 
 
-  const handleAddClick = async (product_id) => {
-    try {
-      const response = await axios.get('/api/router', {
-        params: {
-          organization_id: '7101c48ff6214e71a6cfff321ff556aa',
-          Appid: 'MGUL2NAI5DLU5GH',
-          Apikey: '8ecfeb5549904529afd093898202424a20240712121850955434'
-        }
-      });
-      const productDetails = response.data.items;
-      // Navigate to ProductDetail page with product details
-      console.log(productDetails)
-      router.push({
-        pathname: '/cart',
-        query: { productDetails: JSON.stringify(productDetails) }
-      });
-    } catch (error) {
-      console.error('Error fetching product details:', error);
-    }
-  };
+
+
+ 
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
+
     <div className="container mx-auto px-4 py-16 poppins">
+      <div className="hidden">
+        <Header products={products}/>
+      </div>
       <div className="w-full flex items-center justify-between">
         <div className="relative inline-block text-left md:block lg:hidden">
           <div>
@@ -234,13 +223,13 @@ const ProductList = () => {
               <p className="text-green-600">₦{product.current_price[0].NGN[0]}</p>
               <p className="text-gray-400 line-through">₦{product.discountedPrice}</p>
             </div>
-            <button
-             onClick={() => handleAddClick(product.id)}
+            <Link
+             href={`/cart?id=${product.id}`}
               className="p-2 rounded-md text-sm flex items-center text-green-700 add hover:bg-gray-200"
             >
               <MdShoppingCart className="text-green-700 mr-2" />
               Add
-            </button>
+            </Link>
           </div>
         ))}
       </div>
