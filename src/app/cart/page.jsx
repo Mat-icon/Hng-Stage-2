@@ -81,7 +81,7 @@ const SubCartDetails = () => {
           </p>
           <Link
             href={`/checkout?id=${product.id}`}
-            className="p-4 md:w-2/3 w-full rounded-md text-sm flex justify-center items-center hover:bg-gray-100 add text-green-700"
+            className="p-4 md:w-3/4 w-full rounded-md text-sm flex justify-center items-center hover:bg-gray-100 add text-green-700"
           >
             <MdShoppingCart className="text-green-700 mr-2" />
             Add To Shopping Cart
@@ -138,6 +138,8 @@ const CartDetails = () => {
       <Header />
       <div className="w-full h-14 md:p-4 flex space-x-4 pl-8 md:pl-16 items-center text-sm poppins">
         <Link href="/">Home</Link>
+        <MdArrowRight />
+        <Link href="/products">Products</Link>
         <MdArrowRight />
         <Link href="/cart" className=" text-green-500">
           Cart
