@@ -1,38 +1,100 @@
 "use client";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import fetchProducts from "../api/proxy";
 import { MdCamera, MdFilterList, MdSearch, MdShoppingCart } from "react-icons/md";
-import products from "./Products";
-import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const ProductList = () => {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [error, setError] = useState(null);
+  const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [filteredProducts, setFilteredProducts] = useState(products);
 
-  const [query, setQuery] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const data = await fetchProducts({
+          organization_id: process.env.TIMBU_ORGANIZATION,
+          Appid: process.env.TIMBU_CLOUD_ID,
+          Apikey: process.env.TIMBU_CLOUD_KEY,
+          page: currentPage,
+          size: pageSize,
+          reverse_sort: false
+        });
+        setProducts(data.items);
+        setTotalPages(Math.ceil(data.total / pageSize));
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getProducts();
+  }, [currentPage]);
 
   const handleInputChange = (e) => {
     const newQuery = e.target.value;
     setQuery(newQuery);
-    handleSearch(newQuery); // Call the onSearch function with the current query
+    handleSearch(newQuery);
   };
 
   const handleSearch = (query) => {
-    // Filter the products based on the search query
-    const result = products.filter(product =>
+    const result = products.filter((product) =>
       product.name.toLowerCase().includes(query.toLowerCase())
     );
-    // Update the filtered products state
-    setFilteredProducts(result);
+    setProducts(result);
   };
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+
+  const handleAddClick = async (product_id) => {
+    try {
+      const response = await axios.get('/api/router', {
+        params: {
+          organization_id: '7101c48ff6214e71a6cfff321ff556aa',
+          Appid: 'MGUL2NAI5DLU5GH',
+          Apikey: '8ecfeb5549904529afd093898202424a20240712121850955434'
+        }
+      });
+      const productDetails = response.data.items;
+      // Navigate to ProductDetail page with product details
+      console.log(productDetails)
+      router.push({
+        pathname: '/cart',
+        query: { productDetails: JSON.stringify(productDetails) }
+      });
+    } catch (error) {
+      console.error('Error fetching product details:', error);
+    }
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   return (
     <div className="container mx-auto px-4 py-16 poppins">
       <div className="w-full flex items-center justify-between">
-        <div className="relative inline-block text-left  md:block lg:hidden">
+        <div className="relative inline-block text-left md:block lg:hidden">
           <div>
             <button
               type="button"
@@ -58,9 +120,6 @@ const ProductList = () => {
               </svg>
             </button>
           </div>
-
-
-
 
           {isOpen && (
             <div
@@ -103,7 +162,7 @@ const ProductList = () => {
                   className="text-gray-700 block px-4 py-2 text-sm"
                   role="menuitem"
                   tabIndex="-1"
-                  id="menu-item-2"
+                  id="menu-item-3"
                 >
                   Packaged
                 </a>
@@ -112,14 +171,10 @@ const ProductList = () => {
           )}
         </div>
 
-
-
-
-
         <div className="hidden md:hidden lg:block">
-          <ul className="inline-flex space-x-2 md:space-x-8 text-gray-500  md:text-xl">
+          <ul className="inline-flex space-x-2 md:space-x-8 text-gray-500 md:text-xl">
             <li>
-              <Link href="/" className=" active:text-green-500">
+              <Link href="/" className="active:text-green-500">
                 All Products
               </Link>
             </li>
@@ -138,60 +193,78 @@ const ProductList = () => {
           </ul>
         </div>
         <div className="flex space-x-4 items-center">
-         
-          <MdFilterList className=" text-lg cursor-pointer" />
-          <MdCamera className=" text-lg cursor-pointer" />
+          <MdFilterList className="text-lg cursor-pointer" />
+          <MdCamera className="text-lg cursor-pointer" />
         </div>
       </div>
       <form className="lg:w-4/6 w-full mt-8 flex">
-          <input
-            placeholder="search for product"
-            type="text"
-            className="md:p-4 p-2 rounded-md text-xs w-4/6 bg-slate-50 "
-            style={{ border: "1px solid #7AC74F" }}
-            value={query}
-            onChange={handleInputChange}
-          />
-          <button
-            className="md:p-4 p-2 rounded-md ml-3 text-xs"
-            style={{ background: "#7AC74F", color: "white" }}
-            onClick={handleInputChange}
-          >
-            Search
-          </button>
-</form>
+        <input
+          placeholder="search for product"
+          type="text"
+          className="md:p-4 p-2 rounded-md text-xs w-4/6 bg-slate-50"
+          style={{ border: "1px solid #7AC74F" }}
+          value={query}
+          onChange={handleInputChange}
+        />
+        <button
+          className="md:p-4 p-2 rounded-md ml-3 text-xs"
+          style={{ background: "#7AC74F", color: "white" }}
+          onClick={(e) => e.preventDefault()}
+        >
+          Search
+        </button>
+      </form>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
-        {filteredProducts.map((product) => (
+        {products.map((product) => (
           <div
             key={product.id}
             className="relative border border-slate-200 rounded-xl product-card2 bg-slate-50 flex flex-col items-center justify-center overflow-hidden"
           >
-            <span className="absolute top-0 left-0 p-2 px-2 w-14 text-xs bg-green-500 text-white ">
+            <span className="absolute top-0 left-0 p-2 px-2 w-14 text-xs bg-green-500 text-white">
               {product.discount}% off
             </span>
             <img
-              src={`/images/${product.image}`}
+              src={`https://api.timbu.cloud/images/${product.photos[0].url}`}
               alt={product.name}
-              className=" h-1/2 w-4/5"
+              className="h-1/2 w-4/5"
             />
             <div className="popular-text text-center">
               <h2 className="font-bold">{product.name}</h2>
-              <p className=" text-green-600">₦{product.price}</p>
-              <p className=" text-gray-400 line-through">
-                ₦{product.discountedPrice}
-              </p>
-            </div>{" "}
-            <Link
-              href="/cart"
-              className="p-2 rounded-md text-sm flex  items-center text-green-700 add hover:bg-gray-200"
+              <p className="text-green-600">₦{product.current_price[0].NGN[0]}</p>
+              <p className="text-gray-400 line-through">₦{product.discountedPrice}</p>
+            </div>
+            <button
+             onClick={() => handleAddClick(product.id)}
+              className="p-2 rounded-md text-sm flex items-center text-green-700 add hover:bg-gray-200"
             >
-              <MdShoppingCart className=" text-green-700 mr-2" />
+              <MdShoppingCart className="text-green-700 mr-2" />
               Add
-            </Link>
+            </button>
           </div>
         ))}
       </div>
+
+      <div className="flex justify-between mt-8">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-300 rounded-md text-sm"
+        >
+          Previous
+        </button>
+        <span className="text-sm">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 bg-gray-300 rounded-md text-sm"
+        >
+          Next
+        </button>
+      </div>
+      
     </div>
   );
 };

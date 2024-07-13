@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 import Header from "./Header";
 import { MdArrowRight } from "react-icons/md";
@@ -10,8 +12,24 @@ import { MdOutlineKeyboardArrowDown, MdShoppingCart } from "react-icons/md";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import Link from "next/link";
 import Footer from "./Footer";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+
+
+
 
 const ProductDetail = () => {
+  const router = useRouter();
+  const [productDetails, setProductDetails] = useState(null);
+
+  useEffect(() => {
+    const { productDetails: productDetailsStr } = router.query;
+    if (productDetailsStr) {
+      setProductDetails(JSON.parse(productDetailsStr));
+    }
+  }, [router.query]);
+
+  if (!productDetails) return <div>Loading product details...</div>;
   return (
     <>
       <Header />
@@ -41,7 +59,7 @@ const ProductDetail = () => {
 
             <div className="w-full lg:w-2/4 md:w-full md:ml-4 lg:ml-2 space-y-4">
               <h1 className="text-4xl font-bold mb-2 mt-6 md:mt-0">
-                Sweet Bell Hami Mix
+                {product.name}
               </h1>{" "}
               <p className=" text-sm">
                 Indulge in the vibrant and delicious flavors of our Sweet Bell

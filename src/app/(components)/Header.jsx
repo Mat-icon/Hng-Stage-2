@@ -40,10 +40,10 @@ const toggleMenu =()=>{
           <Link href="/checkout" className="relative">
             <FaCartShopping className=" text-black mr-4 md:mr-8" />
             <span className=" text-x translate-x-1/2 translate-y-1/2 py-1 px-2 absolute bottom-5  bg-lime-500 rounded-full text-white">
-              2
+              12
             </span>
           </Link>
-          <button onClick={toggleMenu} className="text-black block md:block lg:hidden focus:outline-none">
+          <button onClick={toggleMenu} className="text-black block md:hidden lg:hidden focus:outline-none">
             {isOpen ? <MdClose /> : <MdMenu  />}
           </button>
           <button

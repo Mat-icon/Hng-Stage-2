@@ -14,8 +14,7 @@ import Link from "next/link";
 
 const Checkout = () => {
   const [activeTab, setActiveTab] = useState("Free");
-
-  const products = [
+  const [products, setProducts] = useState([
     {
       id: 1,
       name: "Sweet Bell Harri Mix",
@@ -32,39 +31,29 @@ const Checkout = () => {
       quantity: 2,
       imageUrl: "/images/pngwing.com (14).png",
     },
-    {
-      id: 3,
-      name: "Sweet Bell Harri Mix",
-      price: 4000,
-      stockStatus: "In stock",
-      quantity: 2,
-      imageUrl: "/images/pngwing.com (14).png",
-    },
-    {
-      id: 4,
-      name: "Fresh Kale Greens",
-      price: 2000,
-      stockStatus: "Available in 3 days",
-      quantity: 2,
-      imageUrl: "/images/pngwing.com (12).png",
-    },
-    {
-      id: 4,
-      name: "Fresh Kale Greens",
-      price: 2000,
-      stockStatus: "Available in 3 days",
-      quantity: 2,
-      imageUrl: "/images/pngwing.com (12).png",
-    },
-    {
-      id: 5,
-      name: "Fresh Green Wafers",
-      price: 4000,
-      stockStatus: "Out of stock",
-      quantity: 2,
-      imageUrl: "/images/pngwing.com (15).png",
-    },
-  ];
+    
+    // ...other products
+  ]);
+
+  const handleIncrease = (id) => {
+    setProducts(prevProducts => 
+      prevProducts.map(product =>
+        product.id === id ? { ...product, quantity: product.quantity + 1 } : product
+      )
+    );
+  };
+
+  const handleDecrease = (id) => {
+    setProducts(prevProducts => 
+      prevProducts.map(product =>
+        product.id === id ? { ...product, quantity: Math.max(1, product.quantity - 1) } : product
+      )
+    );
+  };
+
+  const calculateTotalPrice = () => {
+    return products.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
+  };
 
   return (
     <div className="w-full h-auto lg:h-200 poppins">
@@ -79,7 +68,7 @@ const Checkout = () => {
         </Link>
       </div>
       <div className="w-full h-4/6 md:p-8 p-2 pb-2 container items-center mx-auto flex flex-col md:flex-col lg:flex-row space-y-8 md:space-x-4">
-        <div className="lg:w-9/12 md:w-full w-full bg-slate-50 h-full shadow-md shadow-gray-300 p-2 md:p-4 rounded-lg ">
+        <div className="lg:w-9/12  md:w-full w-full bg-slate-50 h-full shadow-md shadow-gray-300 p-2 md:p-4 rounded-lg">
           <div className="flex items-center pb-4 border-b border-slate-400">
             <Link href="/cart">
               <FaArrowLeft className="cursor-pointer" />
@@ -96,7 +85,7 @@ const Checkout = () => {
               </p>
             </div>
           </div>
-          <div className="md:p-4 md:h-3/5 lg:h-4/5   space-y-2 overflow-y-scroll">
+          <div className="md:p-4 md:h-3/5 lg:h-4/5 space-y-2 overflow-y-scroll">
             {products.map((product) => (
               <div
                 key={product.id}
@@ -119,22 +108,26 @@ const Checkout = () => {
                       <span className="text-green-500">{product.stockStatus}</span>
                     </div>
                     <div className="quantity md:text-base text-sm space-x-2 md:space-x-4 flex items-center">
-                      <FaMinus className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" />
+                      <FaMinus className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" onClick={() => handleDecrease(product.id)} />
                       <span>{product.quantity}</span>
-                      <MdAdd className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" />
+                      <MdAdd className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" onClick={() => handleIncrease(product.id)} />
                       <span className="text-x">X</span>
-                      <p className="text-x">₦{product.price}</p>
+                      <p className="text-x">₦{(product.price * product.quantity).toFixed(2)}</p>
                     </div>
                   </div>
                 </div>
                 <h1 className="text-sm md:text-2xl font-bold flex flex-col items-center absolute right-5 bottom-5">
-                  ₦{product.price}{" "}
+                  ₦{(product.price * product.quantity).toFixed(2)}
                   <MdDeleteOutline className="text-sm md:text-3xl mt-6 text-red-500 cursor-pointer" />
                 </h1>
               </div>
             ))}
           </div>
+         
+            <h3 className="font-semibold md:text-base text-xs pt-4 md:pt-0">Total: ₦{calculateTotalPrice()}</h3>
+      
         </div>
+
         <div className="md:w-full lg:w-4/12 w-full">
           <div className="bg-slate-50 p-4 shadow-md rounded-md space-y-6 ">
             <div className="w-full bg-gray-200 rounded-lg h-16 flex items-center justify-center space-x-2 py-0 px-2">
@@ -253,7 +246,7 @@ const Checkout = () => {
                       </div>
                     </div>
                     <button className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
-                      Checkout <span className="ml-2">₦5,000</span>
+                      Checkout <span className="ml-2">₦{calculateTotalPrice()}</span>
                     </button>
                 </form>
               </div>
@@ -316,7 +309,7 @@ const Checkout = () => {
                       </div>
                     </div>
                     <button className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
-                      Checkout <span className="ml-2">₦5,000</span>
+                      Checkout <span className="ml-2">₦{calculateTotalPrice()}</span>
                     </button>
                   </form>
                 </div>

@@ -15,7 +15,7 @@ const ProductsPage = () => {
       >
           <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="md:pl-16 pl-8 relative md:top-48 top-36  text-left poppins">
-          <h1 className="text-3xl md:text-5xl font-bold">
+          <h1 className="text-3xl md:text-5xl lg:text-5xl xl:text-6xl font-bold">
             Naturally Grown, Packed <br />
             with Nutrients
           </h1>
