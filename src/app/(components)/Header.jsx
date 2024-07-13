@@ -60,15 +60,15 @@ const toggleMenu =()=>{
           
          `}
        >
-          <ul className="flex flex-col space-y-2 p-4">
+          <ul className="flex flex-col space-y-2 p-4 poppins">
             <li>
               <Link href="/" className="block text-black hover:bg-gray-100 p-2 rounded-md">
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/about" className="block text-black hover:bg-gray-100 p-2 rounded-md">
-                About
+              <Link href="/products" className="block text-black hover:bg-gray-100 p-2 rounded-md">
+                Products
               </Link>
             </li>
             <li>
