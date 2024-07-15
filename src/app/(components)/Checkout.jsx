@@ -12,14 +12,22 @@ import {
 } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
+import { BallTriangle } from "react-loader-spinner";
 
-const Checkout = ({pricePerUnit}) => {
+const Checkout = ({ pricePerUnit }) => {
   const [activeTab, setActiveTab] = useState("Free");
   const [products, setProducts] = useState([]);
   const params = useSearchParams();
   const id = params.get("id");
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [formValues, setFormValues] = useState({
+    name: "",
+    cardNumber: "",
+    expirationDate: "",
+    cvv: "",
+  });
+  const [formErrors, setFormErrors] = useState({});
 
   const increaseQuantity = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
@@ -49,8 +57,51 @@ const Checkout = ({pricePerUnit}) => {
     }
   }, [id]);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formValues.name) {
+      errors.name = "Name on card is required";
+    }
+    if (!formValues.cardNumber) {
+      errors.cardNumber = "Card number is required";
+    } else if (!/^\d{16}$/.test(formValues.cardNumber)) {
+      errors.cardNumber = "Card number must be 16 digits";
+    }
+    if (!formValues.expirationDate) {
+      errors.expirationDate = "Expiration date is required";
+    } else if (!/^\d{2}\/\d{2}$/.test(formValues.expirationDate)) {
+      errors.expirationDate = "Expiration date must be in MM/YY format";
+    }
+    if (!formValues.cvv) {
+      errors.cvv = "CVV is required";
+    } else if (!/^\d{3}$/.test(formValues.cvv)) {
+      errors.cvv = "CVV must be 3 digits";
+    }
+    return errors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = validateForm();
+    if (Object.keys(errors).length === 0) {
+      console.log("Form submitted successfully", formValues);
+    } else {
+      setFormErrors(errors);
+    }
+  };
+
   if (!product) {
-    return <div>Loading...</div>;
+    return (
+      <div className=" w-full h-screen flex items-center justify-center">
+        {" "}
+        <BallTriangle />
+      </div>
+    );
   }
 
   return (
@@ -59,7 +110,7 @@ const Checkout = ({pricePerUnit}) => {
       <div className="w-full h-14 md:p-4 flex space-x-4 pl-8 md:pl-16 items-center text-sm poppins">
         <Link href="/">Home</Link>
         <MdArrowRight />
-        <Link href={`/cart?id=${product.id}`} >Cart</Link>
+        <Link href={`/cart?id=${product.id}`}>Cart</Link>
         <MdArrowRight />
         <Link href="/checkout" className="text-green-500">
           Checkout
@@ -68,7 +119,7 @@ const Checkout = ({pricePerUnit}) => {
       <div className="w-full h-4/6 md:p-8 p-2 pb-2 container items-center mx-auto flex flex-col md:flex-col lg:flex-row space-y-8 md:space-x-4">
         <div className="lg:w-9/12  md:w-full w-full bg-slate-50 h-full shadow-md shadow-gray-300 p-2 md:p-4 rounded-lg">
           <div className="flex items-center pb-4 border-b border-slate-400">
-            <Link  href={`/cart?id=${product.id}`}>
+            <Link href={`/cart?id=${product.id}`}>
               <FaArrowLeft className="cursor-pointer" />
             </Link>
             <h2 className="ml-6 text-sm md:text-base">Continue Shopping</h2>
@@ -101,10 +152,7 @@ const Checkout = ({pricePerUnit}) => {
                     {product.name}
                   </h3>
                   <div className="price flex md:text-base text-x items-center space-x-4 text-gray-500">
-                    <p>
-                      {" "}
-                      ₦{product.current_price}
-                    </p>
+                    <p> ₦{product.current_price}</p>
                     <span className="text-green-500">
                       {product.stockStatus}
                     </span>
@@ -127,14 +175,14 @@ const Checkout = ({pricePerUnit}) => {
                 </div>
               </div>
               <h1 className="text-sm md:text-2xl font-bold flex flex-col items-center absolute right-5 bottom-5">
-              ₦{(product.current_price * quantity).toFixed(2)}
+                ₦{(product.current_price * quantity).toFixed(2)}
                 <MdDeleteOutline className="text-sm md:text-3xl mt-6 text-red-500 cursor-pointer" />
               </h1>
             </div>
           </div>
 
           <h3 className="font-semibold md:text-base text-xs pt-4 md:pt-0">
-            Total: ₦{calculateTotalPrice.toFixed(2)}
+          ₦{(product.current_price * quantity).toFixed(2)}
           </h3>
         </div>
 
@@ -193,39 +241,66 @@ const Checkout = ({pricePerUnit}) => {
                     />
                   </div>
                 </div>
-                <form className="mt-4">
+                <form className="mt-4" onSubmit={handleSubmit}>
                   <label className="block">
                     <span className="text-gray-700">Name on card</span>
                     <input
                       type="text"
+                      value={formValues.name}
+                      onChange={handleInputChange}
                       placeholder="Full name"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-4 text-sm"
                     />
+                    {formErrors.name && (
+                      <p className="text-red-500 text-xs">{formErrors.name}</p>
+                    )}
                   </label>
                   <label className="block mt-4">
                     <span className="text-gray-700">Card Number</span>
                     <input
                       type="text"
+                      name="cardNumber"
+                      value={formValues.cardNumber}
+                      onChange={handleInputChange}
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-sm p-4"
                       placeholder="0000 0000 0000 0000"
                     />
+                    {formErrors.cardNumber && (
+                      <p className="text-red-500 text-xs">
+                        {formErrors.cardNumber}
+                      </p>
+                    )}
                   </label>
                   <div className="grid grid-cols-2 gap-4 mt-4">
                     <label className="block">
                       <span className="text-gray-700">Expiration Date</span>
                       <input
                         type="text"
+                        name="expirationDate"
+                        value={formValues.expirationDate}
+                        onChange={handleInputChange}
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-4 text-sm"
                         placeholder="MM/YY"
                       />
+                      {formErrors.expirationDate && (
+                        <p className="text-red-500 text-xs">
+                          {formErrors.expirationDate}
+                        </p>
+                      )}
                     </label>
                     <label className="block">
                       <span className="text-gray-700">CVV</span>
                       <input
                         type="text"
+                        name="cvv"
+                        value={formValues.cvv}
+                        onChange={handleInputChange}
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-4 text-sm"
                         placeholder="000"
                       />
+                      {formErrors.cvv && (
+                        <p className="text-red-500 text-xs">{formErrors.cvv}</p>
+                      )}
                     </label>
                   </div>
                   <div className="flex items-center mt-4">
@@ -244,7 +319,7 @@ const Checkout = ({pricePerUnit}) => {
                   <div className="flex flex-col space-y-2 pt-6 border-t border-gray-400 mt-8">
                     <div className="flex items-center justify-between">
                       <p>Subtotal</p>
-                      <p className="font-bold">₦4000.00</p>
+                      <p className="font-bold">₦{(product.current_price * quantity).toFixed(2)}</p>
                     </div>
                     <div className="flex items-center justify-between">
                       <p>Delivery</p>
@@ -252,12 +327,14 @@ const Checkout = ({pricePerUnit}) => {
                     </div>
                     <div className="flex items-center justify-between">
                       <p>Total&#40;tax. incl&#41;</p>
-                      <p className="font-bold">₦5000.00</p>
+                      <p className="font-bold"></p>
                     </div>
                   </div>
-                  <button className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
+                  <button type="submit" className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
                     Checkout{" "}
-                    <span className="ml-2">₦{calculateTotalPrice.toFixed(2)}</span>
+                    <span className="ml-2">
+                    ₦{(product.current_price * quantity).toFixed(2)}
+                    </span>
                   </button>
                 </form>
               </div>
@@ -292,17 +369,30 @@ const Checkout = ({pricePerUnit}) => {
                       <span className="text-gray-700">Name on card</span>
                       <input
                         type="text"
+                        value={formValues.name}
+                        onChange={handleInputChange}
                         placeholder="Full name"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-4 text-sm"
                       />
+                       {formErrors.name && (
+                      <p className="text-red-500 text-xs">{formErrors.name}</p>
+                    )}
                     </label>
                     <label className="block mt-4">
                       <span className="text-gray-700">Card Number</span>
                       <input
                         type="text"
+                        name="cardNumber"
+                        value={formValues.cardNumber}
+                        onChange={handleInputChange}
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-sm p-4"
                         placeholder="0000 0000 0000 0000"
                       />
+                        {formErrors.cardNumber && (
+                      <p className="text-red-500 text-xs">
+                        {formErrors.cardNumber}
+                      </p>
+                    )}
                     </label>
 
                     <div className="flex flex-col space-y-2 pt-6 border-t border-gray-400 mt-8">
@@ -321,7 +411,9 @@ const Checkout = ({pricePerUnit}) => {
                     </div>
                     <button className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
                       Checkout{" "}
-                      <span className="ml-2">₦{calculateTotalPrice.toFixed(2)}</span>
+                      <span className="ml-2">
+                        ₦{calculateTotalPrice.toFixed(2)}
+                      </span>
                     </button>
                   </form>
                 </div>

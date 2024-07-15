@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Header from "../(components)/Header";
 import Footer from "../(components)/Footer";
+import { BallTriangle } from "react-loader-spinner";
 
 const SubCartDetails = () => {
   const params = useSearchParams();
@@ -20,11 +21,13 @@ const SubCartDetails = () => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const res = await fetch(`https://timbu-get-single-product.reavdev.workers.dev/${id}?organization_id=7101c48ff6214e71a6cfff321ff556aa&Appid=MGUL2NAI5DLU5GH&Apikey=8ecfeb5549904529afd093898202424a20240712121850955434`);
+        const res = await fetch(
+          `https://timbu-get-single-product.reavdev.workers.dev/${id}?organization_id=7101c48ff6214e71a6cfff321ff556aa&Appid=MGUL2NAI5DLU5GH&Apikey=8ecfeb5549904529afd093898202424a20240712121850955434`
+        );
         const data = await res.json();
         setProduct(data);
       } catch (error) {
-        console.error('Error fetching product details:', error);
+        console.error("Error fetching product details:", error);
       }
     };
 
@@ -34,7 +37,11 @@ const SubCartDetails = () => {
   }, [id]);
 
   if (!product) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        <BallTriangle/>
+      </div>
+    );
   }
 
   return (
@@ -42,7 +49,7 @@ const SubCartDetails = () => {
       <div className="w-full flex flex-col md:flex-row justify-between md:w-5/6 p-4">
         <div className="flex flex-col">
           <img
-             src={`https://api.timbu.cloud/images/${product.photos[0].url}`}
+            src={`https://api.timbu.cloud/images/${product.photos[0].url}`}
             alt={product.name}
             width={280}
             height={200}
@@ -59,9 +66,14 @@ const SubCartDetails = () => {
         </div>
 
         <div className="w-full lg:w-2/4 md:w-full md:ml-4 lg:ml-2 space-y-4">
-          <h1 className="text-4xl font-bold mb-2 mt-6 md:mt-0">{product.name}</h1>
+          <h1 className="text-4xl font-bold mb-2 mt-6 md:mt-0">
+            {product.name}
+          </h1>
           <p className="text-sm">
-            Indulge in the vibrant and delicious flavors of our Sweet Bell Hami Mix, a delightful assortment of the freshest bell peppers. Perfectly packaged for convenience, this mix is ideal for adding a splash of color and a burst of sweetness to your meals.
+            Indulge in the vibrant and delicious flavors of our Sweet Bell Hami
+            Mix, a delightful assortment of the freshest bell peppers. Perfectly
+            packaged for convenience, this mix is ideal for adding a splash of
+            color and a burst of sweetness to your meals.
           </p>
           <div className="w-full text-yellow-400 flex items-center space-x-2 md:space-x-4 text-xl">
             <FaStar />
@@ -71,12 +83,14 @@ const SubCartDetails = () => {
             <FaStarHalf />
             <p className="flex items-center font-bold text-2xl text-black">
               4.5
-              <span className="text-sm font-normal ml-2">&#40;7 reviews&#41;</span>
+              <span className="text-sm font-normal ml-2">
+                &#40;7 reviews&#41;
+              </span>
             </p>
           </div>
           <p className="text-4xl mb-2 flex flex-col text-green-700 font-bold">
-            <span className="font-bold text-xs text-black">Total Price</span>
-            ₦{product.current_price}
+            <span className="font-bold text-xs text-black">Total Price</span>₦
+            {product.current_price}
             <span className="text-base line-through text-gray-500">₦7000</span>
           </p>
           <Link
@@ -95,13 +109,16 @@ const SubCartDetails = () => {
             <h2 className="text-xl font-bold mb-2">Key Features</h2>
             <ul className="list-disc list-inside">
               <li>
-                <span className="font-bold">Fresh and flavorful:</span> A mix of red, yellow, and orange bell peppers
+                <span className="font-bold">Fresh and flavorful:</span> A mix of
+                red, yellow, and orange bell peppers
               </li>
               <li>
-                <span className="font-bold">Nutritious:</span> Packed with vitamins A and C, antioxidants, and essential nutrients
+                <span className="font-bold">Nutritious:</span> Packed with
+                vitamins A and C, antioxidants, and essential nutrients
               </li>
               <li>
-                <span className="font-bold">Convenient packaging:</span> Pre-washed and ready to use
+                <span className="font-bold">Convenient packaging:</span>{" "}
+                Pre-washed and ready to use
               </li>
             </ul>
           </div>
@@ -113,7 +130,8 @@ const SubCartDetails = () => {
                   Jane D: <span className="text-yellow-300">★★★★★</span>
                 </p>
                 <p className="text-sm">
-                  The Sweet Bell Hami Mix is a game-changer for my meal preps. Fresh and flavorful every time!
+                  The Sweet Bell Hami Mix is a game-changer for my meal preps.
+                  Fresh and flavorful every time!
                 </p>
               </div>
               <div>
@@ -121,7 +139,8 @@ const SubCartDetails = () => {
                   Mark R: <span className="text-yellow-300">★★★★★</span>
                 </p>
                 <p className="text-sm">
-                  My kids love the colorful bell peppers in their lunchboxes. A healthy and tasty option!
+                  My kids love the colorful bell peppers in their lunchboxes. A
+                  healthy and tasty option!
                 </p>
               </div>
             </div>
