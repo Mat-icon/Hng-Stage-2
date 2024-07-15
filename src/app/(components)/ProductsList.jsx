@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import fetchProducts from "../api/proxy";
 import { MdCamera, MdFilterList, MdSearch, MdShoppingCart } from "react-icons/md";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import Header from "./Header";
 import { BallTriangle } from "react-loader-spinner";

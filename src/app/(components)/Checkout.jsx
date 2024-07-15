@@ -10,7 +10,6 @@ import {
   MdOutlineKeyboardArrowDown,
   MdArrowRight,
 } from "react-icons/md";
-import Image from "next/image";
 import Link from "next/link";
 import { BallTriangle } from "react-loader-spinner";
 
