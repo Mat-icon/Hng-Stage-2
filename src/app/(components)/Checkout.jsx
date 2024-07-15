@@ -245,6 +245,7 @@ const Checkout = ({ pricePerUnit }) => {
                     <span className="text-gray-700">Name on card</span>
                     <input
                       type="text"
+                      name="name"
                       value={formValues.name}
                       onChange={handleInputChange}
                       placeholder="Full name"
