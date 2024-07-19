@@ -83,10 +83,10 @@ export function CartProvider({ children }) {
     setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
   };
 
-  const updateQuantity = (productId, quantity) => {
+  const updateQuantity = (productId, newQuantity) => {
     setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
+      prevCart.map((product) =>
+        product.id === productId ? { ...product, quantity: newQuantity } : product
       )
     );
   };

@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 const Checkout = ({ pricePerUnit }) => {
   const { cart, removeFromCart, updateQuantity } = useCart();
   const [activeTab, setActiveTab] = useState("Free");
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState({});
   const [formValues, setFormValues] = useState({
     name: "",
     cardNumber: "",
@@ -28,16 +28,34 @@ const Checkout = ({ pricePerUnit }) => {
   const [formErrors, setFormErrors] = useState({});
   const router = useRouter();
 
-  const increaseQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+  useEffect(() => {
+    const initialQuantities = {};
+    cart.forEach(item => {
+      initialQuantities[item.id] = item.quantity || 1;
+    });
+    setQuantity(initialQuantities);
+  }, [cart]);
+
+  const increaseQuantity = (productId) => {
+    setQuantity(prevQuantities => ({
+      ...prevQuantities,
+      [productId]: prevQuantities[productId] + 1,
+    }));
+    updateQuantity(productId, quantity[productId] + 1);
   };
 
-  const reduceQuantity = () => {
-    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1)); // Prevent quantity from going below 1
+  const reduceQuantity = (productId) => {
+    if (quantity[productId] > 1) {
+      setQuantity(prevQuantities => ({
+        ...prevQuantities,
+        [productId]: prevQuantities[productId] - 1,
+      }));
+      updateQuantity(productId, quantity[productId] - 1);
+    }
   };
 
   const calculateTotalPrice = () => {
-    return quantity * pricePerUnit;
+    return cart.reduce((acc, item) => acc + item.current_price * quantity[item.id], 0).toFixed(2);
   };
 
   const handleInputChange = (e) => {
@@ -101,7 +119,7 @@ const Checkout = ({ pricePerUnit }) => {
       <div className="w-full h-4/6 md:p-8 p-2 pb-2 container items-center mx-auto flex flex-col md:flex-col lg:flex-row space-y-8 md:space-x-4">
         <div className="lg:w-9/12 md:w-full w-full bg-slate-50 h-full shadow-md shadow-gray-300 p-2 md:p-4 rounded-lg">
           <div className="flex items-center pb-4 border-b border-slate-400">
-            <button onClick={() => router.back()} >
+            <button onClick={() => router.back()}>
               <FaArrowLeft className="cursor-pointer" />
             </button>
             <h2 className="ml-6 text-sm md:text-base">Continue Shopping</h2>
@@ -143,20 +161,20 @@ const Checkout = ({ pricePerUnit }) => {
                         className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer"
                         onClick={() => reduceQuantity(item.id)}
                       />
-                      <span>{quantity}</span>
+                      <span>{quantity[item.id]}</span>
                       <MdAdd
                         className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer"
                         onClick={() => increaseQuantity(item.id)}
                       />
                       <span className="text-x">X</span>
                       <p className="text-x">
-                        ₦{(item.current_price * quantity).toFixed(2)}
+                        ₦{(item.current_price * quantity[item.id]).toFixed(2)}
                       </p>
                     </div>
                   </div>
                 </div>
                 <h1 className="text-sm md:text-2xl font-bold flex flex-col items-center absolute right-5 bottom-5">
-                  ₦{(item.current_price * quantity).toFixed(2)}
+                  ₦{(item.current_price * quantity[item.id]).toFixed(2)}
                   <MdDeleteOutline
                     className="text-sm md:text-3xl mt-6 text-red-500 cursor-pointer"
                     onClick={() => removeFromCart(item.id)}
@@ -166,12 +184,10 @@ const Checkout = ({ pricePerUnit }) => {
             ))}
           </div>
           <h3 className="font-semibold md:text-base text-xs pt-4 md:pt-0">
-            ₦
-            {cart
-              .reduce((acc, item) => acc + item.current_price * quantity, 0)
-              .toFixed(2)}
+            ₦{calculateTotalPrice()}
           </h3>
         </div>
+
 
         <div className="md:w-full lg:w-4/12 w-full">
           <div className="bg-slate-50 p-4 shadow-md rounded-md space-y-6 ">
