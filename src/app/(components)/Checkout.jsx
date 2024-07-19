@@ -1,5 +1,6 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+
+
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -12,13 +13,11 @@ import {
 } from "react-icons/md";
 import Link from "next/link";
 import { BallTriangle } from "react-loader-spinner";
+import { useCart } from "./CartContext";
 
-const Checkout = ({ pricePerUnit }) => {
+const Checkout = ({ pricePerUnit}) => {
+  const { cart, removeFromCart } = useCart();
   const [activeTab, setActiveTab] = useState("Free");
-  const [products, setProducts] = useState([]);
-  const params = useSearchParams();
-  const id = params.get("id");
-  const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [formValues, setFormValues] = useState({
     name: "",
@@ -36,25 +35,9 @@ const Checkout = ({ pricePerUnit }) => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1)); // Prevent quantity from going below 1
   };
 
-  const calculateTotalPrice = quantity * pricePerUnit;
-
-  useEffect(() => {
-    const fetchProductDetails = async () => {
-      try {
-        const res = await fetch(
-          `https://timbu-get-single-product.reavdev.workers.dev/${id}?organization_id=7101c48ff6214e71a6cfff321ff556aa&Appid=MGUL2NAI5DLU5GH&Apikey=8ecfeb5549904529afd093898202424a20240712121850955434`
-        );
-        const data = await res.json();
-        setProduct(data);
-      } catch (error) {
-        console.error("Error fetching product details:", error);
-      }
-    };
-
-    if (id) {
-      fetchProductDetails();
-    }
-  }, [id]);
+  const calculateTotalPrice = () => {
+    return quantity * pricePerUnit;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -94,10 +77,9 @@ const Checkout = ({ pricePerUnit }) => {
     }
   };
 
-  if (!product) {
+  if (!cart || cart.length === 0) {
     return (
-      <div className=" w-full h-screen flex items-center justify-center">
-        {" "}
+      <div className="w-full h-screen flex items-center justify-center">
         <BallTriangle />
       </div>
     );
@@ -109,81 +91,67 @@ const Checkout = ({ pricePerUnit }) => {
       <div className="w-full h-14 md:p-4 flex space-x-4 pl-8 md:pl-16 items-center text-sm poppins">
         <Link href="/">Home</Link>
         <MdArrowRight />
-        <Link href={`/cart?id=${product.id}`}>Cart</Link>
+        <Link href="/cart">Cart</Link>
         <MdArrowRight />
         <Link href="/checkout" className="text-green-500">
           Checkout
         </Link>
       </div>
       <div className="w-full h-4/6 md:p-8 p-2 pb-2 container items-center mx-auto flex flex-col md:flex-col lg:flex-row space-y-8 md:space-x-4">
-        <div className="lg:w-9/12  md:w-full w-full bg-slate-50 h-full shadow-md shadow-gray-300 p-2 md:p-4 rounded-lg">
+        <div className="lg:w-9/12 md:w-full w-full bg-slate-50 h-full shadow-md shadow-gray-300 p-2 md:p-4 rounded-lg">
           <div className="flex items-center pb-4 border-b border-slate-400">
-            <Link href={`/cart?id=${product.id}`}>
+            {cart.map((item) => (<Link href={`/cart?id=${item.id}`}>
               <FaArrowLeft className="cursor-pointer" />
-            </Link>
+            </Link>))}
             <h2 className="ml-6 text-sm md:text-base">Continue Shopping</h2>
           </div>
           <div className="space-y-2 p-4 text-x md:text-base">
             <h2>Cart</h2>
             <div className="flex items-center justify-between">
-              <p>You have 1 items in your cart</p>
+              <p>You have {cart.length} items in your cart</p>
               <p className="flex items-center font-medium space-x-4">
-                Sort by :{" "}
-                <MdOutlineKeyboardArrowDown className="cursor-pointer font-normal" />
+                Sort by: <MdOutlineKeyboardArrowDown className="cursor-pointer font-normal" />
               </p>
             </div>
           </div>
           <div className="md:p-4 md:h-3/5 lg:h-4/5 space-y-2 overflow-y-scroll">
-            <div
-              key={product.id}
-              className="bg-white md:p-6 p-2 h-1/3 shadow rounded-md flex justify-between space-x-4 relative"
-            >
-              <div className="flex items-center space-x-2 md:space-x-6">
-                <img
-                  src={`https://api.timbu.cloud/images/${product.photos[0].url}`}
-                  alt={product.name}
-                  width={200}
-                  height={100}
-                  className="rounded-lg w-16 h-24 md:w-24 p-4 md:h-32 bg-green-100"
-                />
-                <div className="flex flex-col space-y-2">
-                  <h3 className="font-semibold md:text-lg text-xs">
-                    {product.name}
-                  </h3>
-                  <div className="price flex md:text-base text-x items-center space-x-4 text-gray-500">
-                    <p> ₦{product.current_price}</p>
-                    <span className="text-green-500">
-                      {product.stockStatus}
-                    </span>
-                  </div>
-                  <div className="quantity md:text-base text-sm space-x-2 md:space-x-4 flex items-center">
-                    <FaMinus
-                      className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer"
-                      onClick={reduceQuantity}
-                    />
-                    <span>{quantity}</span>
-                    <MdAdd
-                      className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer"
-                      onClick={increaseQuantity}
-                    />
-                    <span className="text-x">X</span>
-                    <p className="text-x">
-                      ₦{(product.current_price * quantity).toFixed(2)}
-                    </p>
+            {cart.map((item) => (
+              <div key={item.id} className="bg-white md:p-6 p-2 h-1/3 shadow rounded-md flex justify-between space-x-4 relative">
+                <div className="flex items-center space-x-2 md:space-x-6">
+                  <img
+                    src={`https://api.timbu.cloud/images/${item.photos[0].url}`}
+                    alt={item.name}
+                    width={200}
+                    height={100}
+                    className="rounded-lg w-16 h-24 md:w-24 p-4 md:h-32 bg-green-100"
+                  />
+                  <div className="flex flex-col space-y-2">
+                    <h3 className="font-semibold md:text-lg text-xs">{item.name}</h3>
+                    <div className="price flex md:text-base text-x items-center space-x-4 text-gray-500">
+                      <p>₦{item.current_price}</p>
+                      <span className="text-green-500">{item.stockStatus}</span>
+                    </div>
+                    <div className="quantity md:text-base text-sm space-x-2 md:space-x-4 flex items-center">
+                      <FaMinus className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" onClick={reduceQuantity} />
+                      <span>{quantity}</span>
+                      <MdAdd className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" onClick={increaseQuantity} />
+                      <span className="text-x">X</span>
+                      <p className="text-x">₦{(item.current_price * quantity).toFixed(2)}</p>
+                    </div>
                   </div>
                 </div>
+                <h1 className="text-sm md:text-2xl font-bold flex flex-col items-center absolute right-5 bottom-5">
+                  ₦{(item.current_price * quantity).toFixed(2)}
+                  <MdDeleteOutline className="text-sm md:text-3xl mt-6 text-red-500 cursor-pointer" onClick={()=> removeFromCart(item.id)}/>
+                </h1>
               </div>
-              <h1 className="text-sm md:text-2xl font-bold flex flex-col items-center absolute right-5 bottom-5">
-                ₦{(product.current_price * quantity).toFixed(2)}
-                <MdDeleteOutline className="text-sm md:text-3xl mt-6 text-red-500 cursor-pointer" />
-              </h1>
-            </div>
+            ))}
           </div>
-
           <h3 className="font-semibold md:text-base text-xs pt-4 md:pt-0">
-          ₦{(product.current_price * quantity).toFixed(2)}
+            ₦{(cart.reduce((acc, item) => acc + item.current_price * quantity, 0)).toFixed(2)}
           </h3>
         </div>
+
 
         <div className="md:w-full lg:w-4/12 w-full">
           <div className="bg-slate-50 p-4 shadow-md rounded-md space-y-6 ">
@@ -319,7 +287,7 @@ const Checkout = ({ pricePerUnit }) => {
                   <div className="flex flex-col space-y-2 pt-6 border-t border-gray-400 mt-8">
                     <div className="flex items-center justify-between">
                       <p>Subtotal</p>
-                      <p className="font-bold">₦{(product.current_price * quantity).toFixed(2)}</p>
+                      {/* <p className="font-bold">₦{(item.current_price * quantity).toFixed(2)}</p> */}
                     </div>
                     <div className="flex items-center justify-between">
                       <p>Delivery</p>
@@ -333,7 +301,7 @@ const Checkout = ({ pricePerUnit }) => {
                   <button type="submit" className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
                     Checkout{" "}
                     <span className="ml-2">
-                    ₦{(product.current_price * quantity).toFixed(2)}
+                    {/* ₦{(product.current_price * quantity).toFixed(2)} */}
                     </span>
                   </button>
                 </form>

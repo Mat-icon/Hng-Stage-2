@@ -11,8 +11,11 @@ import { useState, useEffect } from "react";
 import Header from "../(components)/Header";
 import Footer from "../(components)/Footer";
 import { BallTriangle } from "react-loader-spinner";
+import { useCart } from "../(components)/CartContext";
+import Checkout from "../(components)/Checkout";
 
 const SubCartDetails = () => {
+  const {addToCart} = useCart();
   const params = useSearchParams();
   const id = params.get("id");
 
@@ -35,6 +38,8 @@ const SubCartDetails = () => {
       fetchProductDetails();
     }
   }, [id]);
+
+  
 
   if (!product) {
     return (
@@ -93,16 +98,18 @@ const SubCartDetails = () => {
             {product.current_price}
             <span className="text-base line-through text-gray-500">₦7000</span>
           </p>
-          <Link
-            href={`/checkout?id=${product.id}`}
+          <button
+            onClick={()=>addToCart(product)}
             className="p-4 md:w-3/4 w-full rounded-md text-sm flex justify-center items-center hover:bg-gray-100 add text-green-700"
           >
             <MdShoppingCart className="text-green-700 mr-2" />
             Add To Shopping Cart
-          </Link>
+          </button>
         </div>
       </div>
-
+<div className="hidden">
+  <Checkout product={product}/>
+</div>
       <div className="w-full md:w-full lg:w-1/2 p-4">
         <div className="bg-gray-50 shadow-lg shadow-gray-300 rounded-lg space-y-6 p-2">
           <div className="p-4 md:p-8">

@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import { CartProvider } from "./(components)/CartContext";
 
 config.autoAddCss = false;
 const inter = Inter({ subsets: ["latin"] });
@@ -15,7 +16,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <div className="flex flex-col h-screen max-h-screen">
-          <div className="overflow-y-auto flex-grow">{children}</div>
+          <div className="overflow-y-auto flex-grow">
+            {" "}
+            <CartProvider>{children}</CartProvider>
+          </div>
         </div>
       </body>
     </html>

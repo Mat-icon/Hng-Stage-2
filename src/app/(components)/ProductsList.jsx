@@ -1,86 +1,51 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import fetchProducts from "../api/proxy";
-import { MdCamera, MdFilterList, MdSearch, MdShoppingCart } from "react-icons/md";
+import fetchProducts from "../api/products/proxy";
+import {
+  MdCamera,
+  MdFilterList,
+  MdSearch,
+  MdShoppingCart,
+} from "react-icons/md";
 import { useRouter } from "next/navigation";
 import Header from "./Header";
 import { BallTriangle } from "react-loader-spinner";
-
+import { useCart } from "./CartContext";
 
 const ProductList = () => {
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [error, setError] = useState(null);
-  const [query, setQuery] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const {
+    products,
+    loading,
+    cart,
+    addToCart,
+    removeFromCart,
+    isOpen,
+    toggleDropdown,
+    handlePageChange,
+    handleInputChange,
+    error,
+    currentPage,
+    pageSize,
+    totalPages,
+    query,
 
-  const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  } = useCart();
 
-  const router = useRouter();
+  
 
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const data = await fetchProducts({
-          organization_id: process.env.TIMBU_ORGANIZATION,
-          Appid: process.env.TIMBU_CLOUD_ID,
-          Apikey: process.env.TIMBU_CLOUD_KEY,
-          page: currentPage,
-          size: pageSize,
-          reverse_sort: false
-        });
-        setProducts(data.items);
-        setTotalPages(Math.ceil(data.total / pageSize));
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getProducts();
-  }, [currentPage]);
-
-  const handleInputChange = (e) => {
-    const newQuery = e.target.value;
-    setQuery(newQuery);
-    handleSearch(newQuery);
-  };
-
-  const handleSearch = (query) => {
-    const result = products.filter((product) =>
-      product.name.toLowerCase().includes(query.toLowerCase())
+  if (loading)
+    return (
+      <div className="w-full h-screen justify-center flex items-center text-2xl ">
+        <BallTriangle />
+      </div>
     );
-    setProducts(result);
-  };
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
-
-
-
-
- 
-
-  if (loading) return <div className="w-full h-screen justify-center flex items-center text-2xl "><BallTriangle/></div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-
     <div className="container mx-auto px-4 py-16 poppins">
       <div className="hidden">
-        <Header products={products}/>
+        <Header products={products} />
       </div>
       <div className="w-full flex items-center justify-between">
         <div className="relative inline-block text-left md:block lg:hidden">
@@ -220,11 +185,15 @@ const ProductList = () => {
             />
             <div className="popular-text text-center">
               <h2 className="font-bold">{product.name}</h2>
-              <p className="text-green-600">₦{product.current_price[0].NGN[0]}</p>
-              <p className="text-gray-400 line-through">₦{product.discountedPrice}</p>
+              <p className="text-green-600">
+                ₦{product.current_price[0].NGN[0]}
+              </p>
+              <p className="text-gray-400 line-through">
+                ₦{product.discountedPrice}
+              </p>
             </div>
             <Link
-             href={`/cart?id=${product.id}`}
+              href={`/cart?id=${product.id}`}
               className="p-2 rounded-md text-sm flex items-center text-green-700 add hover:bg-gray-200"
             >
               <MdShoppingCart className="text-green-700 mr-2" />
@@ -253,7 +222,6 @@ const ProductList = () => {
           Next
         </button>
       </div>
-      
     </div>
   );
 };

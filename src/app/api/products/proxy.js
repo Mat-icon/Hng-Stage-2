@@ -11,7 +11,7 @@ async function fetchProducts({ organization_id, Appid, Apikey, supplier_id, cate
                 organization_id,
                 reverse_sort,
                 page,
-                size,      
+                size,  
                 Appid,
                 Apikey,
             },
