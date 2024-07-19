@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -14,8 +13,9 @@ import {
 import Link from "next/link";
 import { BallTriangle } from "react-loader-spinner";
 import { useCart } from "./CartContext";
+import { useRouter } from "next/navigation";
 
-const Checkout = ({ pricePerUnit}) => {
+const Checkout = ({ pricePerUnit }) => {
   const { cart, removeFromCart, updateQuantity } = useCart();
   const [activeTab, setActiveTab] = useState("Free");
   const [quantity, setQuantity] = useState(1);
@@ -26,6 +26,7 @@ const Checkout = ({ pricePerUnit}) => {
     cvv: "",
   });
   const [formErrors, setFormErrors] = useState({});
+  const router = useRouter();
 
   const increaseQuantity = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
@@ -100,9 +101,9 @@ const Checkout = ({ pricePerUnit}) => {
       <div className="w-full h-4/6 md:p-8 p-2 pb-2 container items-center mx-auto flex flex-col md:flex-col lg:flex-row space-y-8 md:space-x-4">
         <div className="lg:w-9/12 md:w-full w-full bg-slate-50 h-full shadow-md shadow-gray-300 p-2 md:p-4 rounded-lg">
           <div className="flex items-center pb-4 border-b border-slate-400">
-           <Link href='/cart'>
+            <button onClick={() => router.back()} >
               <FaArrowLeft className="cursor-pointer" />
-            </Link>
+            </button>
             <h2 className="ml-6 text-sm md:text-base">Continue Shopping</h2>
           </div>
           <div className="space-y-2 p-4 text-x md:text-base">
@@ -110,13 +111,17 @@ const Checkout = ({ pricePerUnit}) => {
             <div className="flex items-center justify-between">
               <p>You have {cart.length} items in your cart</p>
               <p className="flex items-center font-medium space-x-4">
-                Sort by: <MdOutlineKeyboardArrowDown className="cursor-pointer font-normal" />
+                Sort by:{" "}
+                <MdOutlineKeyboardArrowDown className="cursor-pointer font-normal" />
               </p>
             </div>
           </div>
           <div className="md:p-4 md:h-3/5 lg:h-4/5 space-y-2 overflow-y-scroll">
             {cart.map((item) => (
-              <div key={item.id} className="bg-white md:p-6 p-2 h-1/3 shadow rounded-md flex justify-between space-x-4 relative">
+              <div
+                key={item.id}
+                className="bg-white md:p-6 p-2 h-1/3 shadow rounded-md flex justify-between space-x-4 relative"
+              >
                 <div className="flex items-center space-x-2 md:space-x-6">
                   <img
                     src={`https://api.timbu.cloud/images/${item.photos[0].url}`}
@@ -126,32 +131,47 @@ const Checkout = ({ pricePerUnit}) => {
                     className="rounded-lg w-16 h-24 md:w-24 p-4 md:h-32 bg-green-100"
                   />
                   <div className="flex flex-col space-y-2">
-                    <h3 className="font-semibold md:text-lg text-xs">{item.name}</h3>
+                    <h3 className="font-semibold md:text-lg text-xs">
+                      {item.name}
+                    </h3>
                     <div className="price flex md:text-base text-x items-center space-x-4 text-gray-500">
                       <p>₦{item.current_price}</p>
                       <span className="text-green-500">{item.stockStatus}</span>
                     </div>
                     <div className="quantity md:text-base text-sm space-x-2 md:space-x-4 flex items-center">
-                      <FaMinus className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" onClick={()=>reduceQuantity(item.id)} />
+                      <FaMinus
+                        className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer"
+                        onClick={() => reduceQuantity(item.id)}
+                      />
                       <span>{quantity}</span>
-                      <MdAdd className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" onClick={()=>increaseQuantity(item.id)} />
+                      <MdAdd
+                        className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer"
+                        onClick={() => increaseQuantity(item.id)}
+                      />
                       <span className="text-x">X</span>
-                      <p className="text-x">₦{(item.current_price * quantity).toFixed(2)}</p>
+                      <p className="text-x">
+                        ₦{(item.current_price * quantity).toFixed(2)}
+                      </p>
                     </div>
                   </div>
                 </div>
                 <h1 className="text-sm md:text-2xl font-bold flex flex-col items-center absolute right-5 bottom-5">
                   ₦{(item.current_price * quantity).toFixed(2)}
-                  <MdDeleteOutline className="text-sm md:text-3xl mt-6 text-red-500 cursor-pointer" onClick={()=> removeFromCart(item.id)}/>
+                  <MdDeleteOutline
+                    className="text-sm md:text-3xl mt-6 text-red-500 cursor-pointer"
+                    onClick={() => removeFromCart(item.id)}
+                  />
                 </h1>
               </div>
             ))}
           </div>
           <h3 className="font-semibold md:text-base text-xs pt-4 md:pt-0">
-            ₦{(cart.reduce((acc, item) => acc + item.current_price * quantity, 0)).toFixed(2)}
+            ₦
+            {cart
+              .reduce((acc, item) => acc + item.current_price * quantity, 0)
+              .toFixed(2)}
           </h3>
         </div>
-
 
         <div className="md:w-full lg:w-4/12 w-full">
           <div className="bg-slate-50 p-4 shadow-md rounded-md space-y-6 ">
@@ -298,10 +318,13 @@ const Checkout = ({ pricePerUnit}) => {
                       <p className="font-bold"></p>
                     </div>
                   </div>
-                  <button type="submit" className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100">
+                  <button
+                    type="submit"
+                    className="mt-4 bg-lime-600 text-white p-4 rounded-md w-full text-base hover:text-lime-600 transition-all duration-300 hover:bg-gray-100"
+                  >
                     Checkout{" "}
                     <span className="ml-2">
-                    {/* ₦{(product.current_price * quantity).toFixed(2)} */}
+                      {/* ₦{(product.current_price * quantity).toFixed(2)} */}
                     </span>
                   </button>
                 </form>
@@ -342,9 +365,11 @@ const Checkout = ({ pricePerUnit}) => {
                         placeholder="Full name"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-4 text-sm"
                       />
-                       {formErrors.name && (
-                      <p className="text-red-500 text-xs">{formErrors.name}</p>
-                    )}
+                      {formErrors.name && (
+                        <p className="text-red-500 text-xs">
+                          {formErrors.name}
+                        </p>
+                      )}
                     </label>
                     <label className="block mt-4">
                       <span className="text-gray-700">Card Number</span>
@@ -356,11 +381,11 @@ const Checkout = ({ pricePerUnit}) => {
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-sm p-4"
                         placeholder="0000 0000 0000 0000"
                       />
-                        {formErrors.cardNumber && (
-                      <p className="text-red-500 text-xs">
-                        {formErrors.cardNumber}
-                      </p>
-                    )}
+                      {formErrors.cardNumber && (
+                        <p className="text-red-500 text-xs">
+                          {formErrors.cardNumber}
+                        </p>
+                      )}
                     </label>
 
                     <div className="flex flex-col space-y-2 pt-6 border-t border-gray-400 mt-8">
