@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import fetchProducts from "../api/products/proxy";
-import { createContext, useContext, useState,useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 export const CartContext = createContext();
 
@@ -18,7 +18,6 @@ export function CartProvider({ children }) {
   const router = useRouter();
 
   useEffect(() => {
-
     const getProducts = async () => {
       try {
         const data = await fetchProducts({
@@ -27,7 +26,7 @@ export function CartProvider({ children }) {
           Apikey: process.env.TIMBU_CLOUD_KEY,
           page: currentPage,
           size: pageSize,
-          reverse_sort: false
+          reverse_sort: false,
         });
         setProducts(data.items);
         setTotalPages(Math.ceil(data.total / pageSize));
@@ -65,13 +64,31 @@ export function CartProvider({ children }) {
   };
 
   const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
+    setCart((prevCart) => {
+      const existingProduct = prevCart.find((item) => item.id === product.id);
+      if (existingProduct) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
     router.push("/checkout");
-
   };
 
   const removeFromCart = (productId) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+  };
+
+  const updateQuantity = (productId, quantity) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === productId ? { ...item, quantity } : item
+      )
+    );
   };
 
   const contextValue = {
@@ -79,6 +96,7 @@ export function CartProvider({ children }) {
     loading,
     cart,
     addToCart,
+    updateQuantity,
     removeFromCart,
     toggleDropdown,
     handlePageChange,
@@ -89,7 +107,6 @@ export function CartProvider({ children }) {
     totalPages,
     query,
     isOpen,
-
   };
 
   return (

@@ -16,7 +16,7 @@ import { BallTriangle } from "react-loader-spinner";
 import { useCart } from "./CartContext";
 
 const Checkout = ({ pricePerUnit}) => {
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart, updateQuantity } = useCart();
   const [activeTab, setActiveTab] = useState("Free");
   const [quantity, setQuantity] = useState(1);
   const [formValues, setFormValues] = useState({
@@ -100,9 +100,9 @@ const Checkout = ({ pricePerUnit}) => {
       <div className="w-full h-4/6 md:p-8 p-2 pb-2 container items-center mx-auto flex flex-col md:flex-col lg:flex-row space-y-8 md:space-x-4">
         <div className="lg:w-9/12 md:w-full w-full bg-slate-50 h-full shadow-md shadow-gray-300 p-2 md:p-4 rounded-lg">
           <div className="flex items-center pb-4 border-b border-slate-400">
-            {cart.map((item) => (<Link href={`/cart?id=${item.id}`}>
+           <Link href='/cart'>
               <FaArrowLeft className="cursor-pointer" />
-            </Link>))}
+            </Link>
             <h2 className="ml-6 text-sm md:text-base">Continue Shopping</h2>
           </div>
           <div className="space-y-2 p-4 text-x md:text-base">
@@ -132,9 +132,9 @@ const Checkout = ({ pricePerUnit}) => {
                       <span className="text-green-500">{item.stockStatus}</span>
                     </div>
                     <div className="quantity md:text-base text-sm space-x-2 md:space-x-4 flex items-center">
-                      <FaMinus className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" onClick={reduceQuantity} />
+                      <FaMinus className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" onClick={()=>reduceQuantity(item.id)} />
                       <span>{quantity}</span>
-                      <MdAdd className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" onClick={increaseQuantity} />
+                      <MdAdd className="p-1 bg-slate-200 rounded-sm text-sm md:text-lg cursor-pointer" onClick={()=>increaseQuantity(item.id)} />
                       <span className="text-x">X</span>
                       <p className="text-x">₦{(item.current_price * quantity).toFixed(2)}</p>
                     </div>
